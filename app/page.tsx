@@ -1,0 +1,39 @@
+import { AboutSection } from "@/components/about-section";
+import { ContactSection } from "@/components/contact-section";
+import { CursorAura } from "@/components/cursor-aura";
+import { FantasyGarden } from "@/components/fantasy-garden";
+import { Footer } from "@/components/footer";
+import { GallerySection } from "@/components/gallery-section";
+import { HeroSection } from "@/components/hero-section";
+import { InquirySection } from "@/components/inquiry-section";
+import { LocationsSection } from "@/components/locations-section";
+import { Navbar } from "@/components/navbar";
+import { NatureBackdrop } from "@/components/nature-backdrop";
+import { ServicesSection } from "@/components/services-section";
+import { TestimonialsSection } from "@/components/testimonials-section";
+import { VideoSection } from "@/components/video-section";
+import { WaterSection } from "@/components/water-section";
+
+export default function Home() {
+  return (
+    <main className="overflow-x-hidden">
+      <CursorAura />
+      <Navbar />
+      <HeroSection />
+      <div className="relative bg-[radial-gradient(circle_at_top,rgba(212,175,104,0.18),transparent_32%)]">
+        <NatureBackdrop />
+        <FantasyGarden />
+        <AboutSection />
+        <LocationsSection />
+        <GallerySection />
+        <VideoSection />
+        <WaterSection />
+        <ServicesSection />
+        <InquirySection />
+        <TestimonialsSection />
+        <ContactSection />
+      </div>
+      <Footer />
+    </main>
+  );
+}
