@@ -73,8 +73,6 @@ export function NatureBackdrop({ variant = "page" }: NatureBackdropProps) {
           </div>
         </motion.div>
       ))}
-
-      <div className="absolute inset-x-0 bottom-0 h-48 bg-[linear-gradient(180deg,transparent,rgba(4,7,5,0.7))]" />
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Camera, Clapperboard, PartyPopper } from "lucide-react";
 
 import { AnimatedSection } from "@/components/animated-section";
@@ -32,6 +33,39 @@ export function AboutSection() {
               title="A scenic film city crafted for stories, celebrations, and unforgettable frames."
               description="Gulab Singh Film City in Adilabad blends cinematic landscapes, open-air sets, lush gardens, and premium event-ready spaces into one destination built for visual impact."
             />
+            <div className="mt-8 overflow-hidden rounded-[32px] border border-white/10 bg-white/10 p-3 shadow-glow">
+              <div className="grid gap-3 sm:grid-cols-[1.2fr_0.8fr]">
+                <div className="relative min-h-[22rem] overflow-hidden rounded-[26px]">
+                  <Image
+                    src="/images/image11.jpeg"
+                    alt="Scenic beauty of Gulab Singh Film City"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 40vw"
+                  />
+                </div>
+                <div className="grid gap-3">
+                  <div className="relative min-h-[10.5rem] overflow-hidden rounded-[22px]">
+                    <Image
+                      src="/images/image2.jpeg"
+                      alt="Outdoor locations at Gulab Singh Film City"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 20vw"
+                    />
+                  </div>
+                  <div className="relative min-h-[10.5rem] overflow-hidden rounded-[22px]">
+                    <Image
+                      src="/images/image4.jpeg"
+                      alt="Photo shoot corner at Gulab Singh Film City"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 20vw"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div className="grid gap-4">
             {highlights.map(({ icon: Icon, title, description }) => (

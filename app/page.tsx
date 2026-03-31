@@ -3,10 +3,12 @@ import { ContactSection } from "@/components/contact-section";
 import { CursorAura } from "@/components/cursor-aura";
 import { FantasyGarden } from "@/components/fantasy-garden";
 import { Footer } from "@/components/footer";
+import { FounderSection } from "@/components/founder-section";
 import { GallerySection } from "@/components/gallery-section";
 import { HeroSection } from "@/components/hero-section";
 import { InquirySection } from "@/components/inquiry-section";
 import { LocationsSection } from "@/components/locations-section";
+import { MediaSection } from "@/components/media-section";
 import { Navbar } from "@/components/navbar";
 import { NatureBackdrop } from "@/components/nature-backdrop";
 import { ServicesSection } from "@/components/services-section";
@@ -24,8 +26,10 @@ export default function Home() {
         <NatureBackdrop />
         <FantasyGarden />
         <AboutSection />
+        <FounderSection />
         <LocationsSection />
         <GallerySection />
+        <MediaSection />
         <VideoSection />
         <WaterSection />
         <ServicesSection />
