@@ -26,8 +26,8 @@ export function Navbar() {
     >
       <nav className="section-shell flex items-center justify-between">
         <a href="#home" className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-gold/30 bg-gold/10 text-sm font-bold tracking-[0.35em] text-gold">
-            GS
+          <div className="flex h-12 w-12 items-center justify-center rounded-[22px] border border-gold/35 bg-[linear-gradient(135deg,rgba(39,51,38,0.96),rgba(22,29,22,0.96))] text-[1rem] font-bold tracking-[0.32em] text-gold shadow-[0_10px_30px_rgba(0,0,0,0.22)]">
+            <span className="translate-x-[0.12rem]">GS</span>
           </div>
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-gold">Film City</p>

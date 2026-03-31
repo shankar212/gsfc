@@ -13,6 +13,11 @@ export const metadata: Metadata = {
   title: "Gulab Singh Film City",
   description:
     "Premium cinematic destination in Adilabad, Telangana for film shoots, pre-wedding sessions, and unforgettable events.",
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
