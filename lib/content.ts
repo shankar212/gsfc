@@ -3,6 +3,7 @@ export const navItems = [
   { label: "Locations", href: "#locations" },
   { label: "Gallery", href: "#gallery" },
   { label: "Media", href: "#media" },
+  { label: "YouTube", href: "#youtube" },
   { label: "Services", href: "#services" },
   { label: "Contact", href: "#contact" },
 ];
@@ -132,6 +133,44 @@ export const mediaVideos = [
   },
 ];
 
+export const shootEventMedia = {
+  videos: [
+    {
+      title: "Shoot Event Highlight",
+      src: "/shoot%20events/video1.mp4",
+    },
+    {
+      title: "Live Event Coverage",
+      src: "/shoot%20events/video2.mp4",
+    },
+  ],
+  images: [
+    {
+      title: "Event Stage Mood",
+      image: "/shoot%20events/image1.jpeg",
+    },
+    {
+      title: "Guest Experience",
+      image: "/shoot%20events/image2.jpeg",
+    },
+    {
+      title: "Shoot-ready Setup",
+      image: "/shoot%20events/image3.jpeg",
+    },
+    {
+      title: "Celebration Frames",
+      image: "/shoot%20events/image4.jpeg",
+    },
+  ],
+};
+
+export const youtubeInfo = {
+  videoUrl: "https://www.youtube.com/embed/0sSCgekB8dk?si=m0-bOvOMsX19_N3T",
+  watchUrl: "https://youtu.be/0sSCgekB8dk?si=m0-bOvOMsX19_N3T",
+  channelUrl: "https://www.youtube.com/@gulabsinghagriform4576",
+  channelLabel: "@gulabsinghagriform4576",
+};
+
 export const founderMessage = {
   name: "Gulab Singh",
   role: "Founder",
@@ -168,7 +207,7 @@ export const contactInfo = {
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3759.6434907997286!2d78.48046217521753!3d19.556913581749253!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd267a5fb313fa5%3A0xdc7de073e3b107aa!2sGulab%20Singh%20Film%20city!5e0!3m2!1sen!2sin!4v1774943266812!5m2!1sen!2sin",
   directions:
     "https://www.google.com/maps/search/?api=1&query=Gulab+Singh+Film+City+Adilabad+Telangana",
-  videoUrl: "https://www.youtube.com/embed/Scxs7L0vhZ4?si=Qk9e2_gvU6zL0lTn",
+  videoUrl: "https://www.youtube.com/embed/HfJn4evA9w8?si=kXhPStJRjLF8ruva",
   heroVideo:
     "https://cdn.coverr.co/videos/coverr-aerial-view-of-a-beautiful-lake-1566306053517?download=1080p",
 };

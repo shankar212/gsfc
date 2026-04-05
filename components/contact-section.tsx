@@ -48,7 +48,7 @@ export function ContactSection() {
                 href={contactInfo.directions}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex w-fit rounded-full bg-gold px-6 py-4 text-sm font-semibold text-black transition hover:scale-[1.02]"
+                className="inline-flex w-full justify-center rounded-full bg-gold px-6 py-4 text-sm font-semibold text-black transition hover:scale-[1.02] sm:w-fit"
               >
                 Get Directions
               </a>

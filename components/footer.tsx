@@ -1,6 +1,6 @@
 import { Facebook, Instagram, Youtube } from "lucide-react";
 
-import { contactInfo, navItems } from "@/lib/content";
+import { contactInfo, navItems, youtubeInfo } from "@/lib/content";
 
 export function Footer() {
   return (
@@ -31,16 +31,29 @@ export function Footer() {
             <p>{contactInfo.address}</p>
           </div>
           <div className="mt-5 flex items-center gap-3 text-white">
-            {[Instagram, Facebook, Youtube].map((Icon, index) => (
-              <a
-                key={index}
-                href="#"
-                className="rounded-full border border-white/10 bg-white/5 p-3 transition hover:bg-white/10"
-                aria-label="Social link"
-              >
-                <Icon size={16} />
-              </a>
-            ))}
+            <a
+              href="#"
+              className="rounded-full border border-white/10 bg-white/5 p-3 transition hover:bg-white/10"
+              aria-label="Instagram"
+            >
+              <Instagram size={16} />
+            </a>
+            <a
+              href="#"
+              className="rounded-full border border-white/10 bg-white/5 p-3 transition hover:bg-white/10"
+              aria-label="Facebook"
+            >
+              <Facebook size={16} />
+            </a>
+            <a
+              href={youtubeInfo.channelUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-full border border-white/10 bg-white/5 p-3 transition hover:bg-white/10"
+              aria-label="YouTube"
+            >
+              <Youtube size={16} />
+            </a>
           </div>
         </div>
       </div>

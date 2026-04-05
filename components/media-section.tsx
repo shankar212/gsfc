@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronLeft, ChevronRight, Clapperboard, ImagePlay, Sparkles, Waves } from "lucide-react";
+import { ArrowLeft, ChevronLeft, ChevronRight, Clapperboard, Expand, ImagePlay, Sparkles, Waves } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { AnimatedSection } from "@/components/animated-section";
@@ -29,6 +29,8 @@ const mediaFeatures = [
 
 export function MediaSection() {
   const [index, setIndex] = useState(0);
+  const [activeImage, setActiveImage] = useState<(typeof mediaHighlights)[number] | null>(null);
+  const [showVideoModal, setShowVideoModal] = useState(false);
 
   useEffect(() => {
     const timer = window.setInterval(() => {
@@ -89,11 +91,11 @@ export function MediaSection() {
           </div>
         </div>
 
-        <div className="mt-10 overflow-hidden rounded-[34px] border border-white/10 bg-white/10 p-4 shadow-glow sm:p-5">
+        <div className="mt-10 overflow-hidden rounded-[28px] border border-white/10 bg-white/10 p-4 shadow-glow sm:rounded-[34px] sm:p-5">
           <div className="mb-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.28em] text-gold">Video Slides</p>
-              <h3 className="mt-2 text-2xl font-semibold text-white">Moving visuals from across the venue</h3>
+              <h3 className="mt-2 text-xl font-semibold text-white sm:text-2xl">Moving visuals from across the venue</h3>
             </div>
             <div className="flex items-center gap-3">
               <button
@@ -138,6 +140,14 @@ export function MediaSection() {
                       preload="metadata"
                     />
                   </div>
+                  <button
+                    type="button"
+                    className="absolute right-4 top-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/35 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white backdrop-blur-xl transition hover:bg-black/50"
+                    onClick={() => setShowVideoModal(true)}
+                  >
+                    <Expand size={14} />
+                    Full View
+                  </button>
                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent p-5">
                     <p className="text-xl font-semibold text-white">{currentVideo.title}</p>
                   </div>
@@ -145,13 +155,13 @@ export function MediaSection() {
               </AnimatePresence>
             </div>
 
-            <div className="grid gap-3">
+            <div className="flex gap-3 overflow-x-auto pb-1 lg:grid lg:overflow-visible lg:pb-0">
               {mediaVideos.map((video, videoIndex) => (
                 <button
                   key={video.src}
                   type="button"
                   onClick={() => setIndex(videoIndex)}
-                  className={`rounded-[22px] border px-4 py-4 text-left transition ${
+                  className={`min-w-[210px] rounded-[22px] border px-4 py-4 text-left transition lg:min-w-0 ${
                     videoIndex === index
                       ? "border-gold/35 bg-gold/10 text-white"
                       : "border-white/10 bg-white/5 text-white/72 hover:bg-white/10"
@@ -167,13 +177,17 @@ export function MediaSection() {
           </div>
         </div>
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-3">
+        <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {mediaHighlights.map((item) => (
             <article
               key={item.title}
               className="group hover-glow-card overflow-hidden rounded-[30px] border border-white/10 bg-white/10 shadow-glass"
             >
-              <div className="relative h-72 overflow-hidden">
+              <button
+                type="button"
+                className="relative h-72 w-full overflow-hidden text-left"
+                onClick={() => setActiveImage(item)}
+              >
                 <Image
                   src={item.image}
                   alt={item.title}
@@ -185,7 +199,7 @@ export function MediaSection() {
                 <div className="absolute left-4 top-4 rounded-full border border-white/15 bg-black/20 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-white backdrop-blur-xl">
                   {item.tag}
                 </div>
-              </div>
+              </button>
               <div className="p-6">
                 <h3 className="text-xl font-semibold text-white">{item.title}</h3>
                 <p className="mt-3 text-sm leading-7 text-white/66">{item.description}</p>
@@ -194,6 +208,78 @@ export function MediaSection() {
           ))}
         </div>
       </div>
+
+      <AnimatePresence>
+        {showVideoModal && (
+          <motion.div
+            className="fixed inset-0 z-[90] flex items-center justify-center bg-black/90 p-4 backdrop-blur-xl"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowVideoModal(false)}
+          >
+            <motion.div
+              className="relative w-full max-w-6xl overflow-hidden rounded-[32px] border border-white/10 bg-black"
+              initial={{ scale: 0.97, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.97, opacity: 0 }}
+              onClick={(event) => event.stopPropagation()}
+            >
+              <div className="aspect-video">
+                <video
+                  src={currentVideo.src}
+                  className="h-full w-full object-contain bg-black"
+                  controls
+                  autoPlay
+                  playsInline
+                />
+              </div>
+              <div className="absolute left-4 top-4">
+                <button
+                  type="button"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/40 px-4 py-2 text-sm font-medium text-white backdrop-blur-xl"
+                  onClick={() => setShowVideoModal(false)}
+                >
+                  <ArrowLeft size={16} />
+                  Back
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+
+        {activeImage && (
+          <motion.div
+            className="fixed inset-0 z-[90] flex items-center justify-center bg-black/90 p-4 backdrop-blur-xl"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setActiveImage(null)}
+          >
+            <motion.div
+              className="relative w-full max-w-6xl overflow-hidden rounded-[32px] border border-white/10"
+              initial={{ scale: 0.97, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.97, opacity: 0 }}
+              onClick={(event) => event.stopPropagation()}
+            >
+              <div className="relative aspect-[16/10]">
+                <Image src={activeImage.image} alt={activeImage.title} fill className="object-contain bg-black" sizes="100vw" />
+              </div>
+              <div className="absolute left-4 top-4">
+                <button
+                  type="button"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/40 px-4 py-2 text-sm font-medium text-white backdrop-blur-xl"
+                  onClick={() => setActiveImage(null)}
+                >
+                  <ArrowLeft size={16} />
+                  Back
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </AnimatedSection>
   );
 }

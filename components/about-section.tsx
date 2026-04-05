@@ -1,5 +1,9 @@
+"use client";
+
 import Image from "next/image";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Camera, Clapperboard, PartyPopper } from "lucide-react";
+import { useRef } from "react";
 
 import { AnimatedSection } from "@/components/animated-section";
 import { SectionHeading } from "@/components/section-heading";
@@ -23,11 +27,20 @@ const highlights = [
 ];
 
 export function AboutSection() {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  const collageY = useTransform(scrollYProgress, [0, 1], [50, -35]);
+  const sidebarY = useTransform(scrollYProgress, [0, 1], [20, -20]);
+
   return (
     <AnimatedSection id="about" className="relative py-24 sm:py-28">
-      <div className="section-shell">
+      <div ref={ref} className="section-shell">
         <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-          <div>
+          <motion.div style={{ y: collageY }}>
             <SectionHeading
               tag="About"
               title="A scenic film city crafted for stories, celebrations, and unforgettable frames."
@@ -66,8 +79,8 @@ export function AboutSection() {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="grid gap-4">
+          </motion.div>
+          <motion.div className="grid gap-4" style={{ y: sidebarY }}>
             {highlights.map(({ icon: Icon, title, description }) => (
               <div key={title} className="soft-card p-6">
                 <div className="flex items-start gap-4">
@@ -81,7 +94,7 @@ export function AboutSection() {
                 </div>
               </div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </AnimatedSection>

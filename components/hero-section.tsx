@@ -26,6 +26,8 @@ export function HeroSection() {
   const secondaryHaloX = useTransform(haloX, (value) => value * -0.7);
   const secondaryHaloY = useTransform(haloY, (value) => value * -0.6);
   const panelOffsetY = useTransform(() => panelY.get() + sideY.get());
+  const mistY = useTransform(scrollYProgress, [0, 1], [0, -140]);
+  const branchY = useTransform(scrollYProgress, [0, 1], [0, -70]);
 
   const radialGlow = useMotionTemplate`radial-gradient(circle at ${useTransform(mouseX, [-0.5, 0.5], [35, 65])}% ${useTransform(mouseY, [-0.5, 0.5], [30, 60])}%, rgba(75, 255, 145, 0.18), transparent 32%)`;
 
@@ -65,14 +67,20 @@ export function HeroSection() {
         className="absolute bottom-[10%] right-[18%] h-56 w-56 rounded-full bg-gold/14 blur-[120px]"
         style={{ x: secondaryHaloX, y: secondaryHaloY }}
       />
+      <motion.div
+        className="absolute inset-x-[12%] top-[16%] h-56 rounded-full bg-[radial-gradient(circle,rgba(130,255,186,0.14),transparent_68%)] blur-[90px]"
+        style={{ y: mistY }}
+      />
       <div className="ambient-line left-[8%] top-[18%] w-[18rem]" />
       <div className="ambient-line right-[8%] top-[72%] w-[22rem]" />
-      <TreeBranch className="top-[2%]" />
+      <motion.div style={{ y: branchY }} className="absolute inset-0">
+        <TreeBranch className="top-[2%]" />
+      </motion.div>
       <NatureBackdrop variant="hero" />
       <FantasyGarden mode="hero" />
       <FloatingLeaves />
 
-      <motion.div className="section-shell relative z-[4] flex min-h-screen items-center py-28" style={{ y: contentY }}>
+      <motion.div className="section-shell relative z-[4] flex min-h-screen items-center py-24 sm:py-28" style={{ y: contentY }}>
         <div className="max-w-4xl">
           <motion.span
             initial={{ opacity: 0, y: 16 }}
@@ -86,7 +94,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="mt-6 max-w-4xl text-5xl font-semibold leading-[1.05] text-white sm:text-6xl lg:text-8xl"
+            className="mt-5 max-w-4xl text-4xl font-semibold leading-[1.02] text-white sm:mt-6 sm:text-6xl lg:text-8xl"
           >
             Gulab Singh Film City
           </motion.h1>
@@ -94,16 +102,16 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.16 }}
-            className="mt-5 inline-flex items-center gap-3 rounded-full border border-emerald-200/15 bg-emerald-300/10 px-4 py-2 text-sm text-emerald-50/90 backdrop-blur-xl"
+            className="mt-4 inline-flex max-w-full items-center gap-3 rounded-full border border-emerald-200/15 bg-emerald-300/10 px-4 py-2 text-xs text-emerald-50/90 backdrop-blur-xl sm:mt-5 sm:text-sm"
           >
             <Sparkles size={16} className="text-gold" />
-            Fantasy greenery, cinematic waterlines, and living outdoor frames
+            <span className="truncate sm:whitespace-normal">Fantasy greenery, cinematic waterlines, and living outdoor frames</span>
           </motion.div>
           <motion.p
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mt-6 max-w-2xl text-lg leading-8 text-white/80 sm:text-xl"
+            className="mt-5 max-w-2xl text-base leading-7 text-white/80 sm:mt-6 sm:text-xl sm:leading-8"
           >
             A Perfect Destination for Shoots & Events
           </motion.p>
@@ -111,7 +119,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.24 }}
-            className="mt-6 max-w-xl rounded-[26px] border border-emerald-200/10 bg-emerald-950/18 px-5 py-4 backdrop-blur-xl"
+            className="mt-5 max-w-xl rounded-[22px] border border-emerald-200/10 bg-emerald-950/18 px-4 py-4 backdrop-blur-xl sm:mt-6 sm:rounded-[26px] sm:px-5"
           >
             <p className="text-sm leading-7 text-white/68">
               Enter a magical world of scenic park views, fantasy greenery, reflective water edges, and premium open-air spaces crafted for shoots, celebrations, and unforgettable moments.
@@ -121,15 +129,12 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="mt-10 flex flex-col gap-4 sm:flex-row"
+            className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:gap-4"
           >
-            <a
-              href="#locations"
-              className="glow-button"
-            >
+            <a href="#locations" className="glow-button w-full sm:w-auto">
               Explore Locations
             </a>
-            <a href="#inquiry" className="ghost-button">
+            <a href="#inquiry" className="ghost-button w-full sm:w-auto">
               Book Now
             </a>
           </motion.div>
@@ -138,7 +143,7 @@ export function HeroSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.6 }}
-            className="mt-14 grid max-w-3xl gap-4 sm:grid-cols-3"
+            className="mt-10 grid max-w-3xl gap-3 sm:mt-14 sm:gap-4 sm:grid-cols-3"
           >
             {[
               ["Film Shoots", "Outdoor cinematic locations"],
@@ -148,7 +153,7 @@ export function HeroSection() {
               <motion.div
                 key={title}
                 whileHover={{ y: -8, scale: 1.02 }}
-                className="hero-card hover-glow-card rounded-[24px] p-4"
+                className="hero-card hover-glow-card rounded-[22px] p-4"
               >
                 <p className="text-sm font-semibold text-white">{title}</p>
                 <p className="mt-2 text-sm text-white/65">{copy}</p>
@@ -193,7 +198,7 @@ export function HeroSection() {
         initial={{ opacity: 0, y: -12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ repeat: Infinity, repeatType: "mirror", duration: 1.6 }}
-        className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-sm text-white/78"
+        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-sm text-white/78 sm:flex"
       >
         <span>Scroll</span>
         <ChevronDown className="animate-float" size={18} />

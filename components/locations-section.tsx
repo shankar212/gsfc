@@ -1,24 +1,33 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { MapPinned } from "lucide-react";
+import { useRef } from "react";
 
 import { AnimatedSection } from "@/components/animated-section";
 import { SectionHeading } from "@/components/section-heading";
 import { locationCards } from "@/lib/content";
 
 export function LocationsSection() {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  const cardsY = useTransform(scrollYProgress, [0, 1], [45, -30]);
+
   return (
     <AnimatedSection id="locations" className="py-24 sm:py-28">
-      <div className="section-shell">
+      <div ref={ref} className="section-shell">
         <SectionHeading
           tag="Locations"
           title="Scenic spots designed to elevate every production and celebration."
           description="Explore lush gardens, open-air event spaces, outdoor sets, and naturally photogenic corners built for films, wedding stories, and branded shoots."
         />
 
-        <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+        <motion.div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4" style={{ y: cardsY }}>
           {locationCards.map((card) => (
             <motion.article
               key={card.title}
@@ -45,7 +54,7 @@ export function LocationsSection() {
               </div>
             </motion.article>
           ))}
-        </div>
+        </motion.div>
       </div>
     </AnimatedSection>
   );

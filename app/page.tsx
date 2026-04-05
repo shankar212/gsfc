@@ -11,14 +11,18 @@ import { LocationsSection } from "@/components/locations-section";
 import { MediaSection } from "@/components/media-section";
 import { Navbar } from "@/components/navbar";
 import { NatureBackdrop } from "@/components/nature-backdrop";
+import { ParallaxBackground } from "@/components/parallax-background";
+import { ShootEventsSection } from "@/components/shoot-events-section";
 import { ServicesSection } from "@/components/services-section";
 import { TestimonialsSection } from "@/components/testimonials-section";
 import { VideoSection } from "@/components/video-section";
 import { WaterSection } from "@/components/water-section";
+import { YoutubeSection } from "@/components/youtube-section";
 
 export default function Home() {
   return (
-    <main className="overflow-x-hidden">
+    <main className="relative isolate overflow-x-hidden">
+      <ParallaxBackground />
       <CursorAura />
       <Navbar />
       <HeroSection />
@@ -30,6 +34,8 @@ export default function Home() {
         <LocationsSection />
         <GallerySection />
         <MediaSection />
+        <ShootEventsSection />
+        <YoutubeSection />
         <VideoSection />
         <WaterSection />
         <ServicesSection />
