@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useMotionTemplate, useMotionValue, useScroll, useTransform } from "framer-motion";
+import { motion, useMotionTemplate, useMotionValue, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { ChevronDown, Sparkles } from "lucide-react";
 import { useEffect } from "react";
 
@@ -11,6 +11,7 @@ import { TreeBranch } from "@/components/tree-branch";
 import { contactInfo } from "@/lib/content";
 
 export function HeroSection() {
+  const reduceMotion = useReducedMotion();
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const { scrollYProgress } = useScroll();
@@ -32,6 +33,10 @@ export function HeroSection() {
   const radialGlow = useMotionTemplate`radial-gradient(circle at ${useTransform(mouseX, [-0.5, 0.5], [35, 65])}% ${useTransform(mouseY, [-0.5, 0.5], [30, 60])}%, rgba(75, 255, 145, 0.18), transparent 32%)`;
 
   useEffect(() => {
+    if (reduceMotion) {
+      return;
+    }
+
     const handleMove = (event: MouseEvent) => {
       mouseX.set(event.clientX / window.innerWidth - 0.5);
       mouseY.set(event.clientY / window.innerHeight - 0.5);
@@ -39,7 +44,7 @@ export function HeroSection() {
 
     window.addEventListener("mousemove", handleMove);
     return () => window.removeEventListener("mousemove", handleMove);
-  }, [mouseX, mouseY]);
+  }, [reduceMotion, mouseX, mouseY]);
 
   return (
     <section id="home" className="snap-section relative min-h-screen overflow-hidden">
@@ -58,27 +63,37 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-hero-overlay" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(212,175,104,0.16),transparent_26%)]" />
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(2,8,5,0.15),rgba(2,8,5,0.66))]" />
-      <motion.div className="absolute inset-0 opacity-90" style={{ backgroundImage: radialGlow }} />
-      <motion.div
-        className="absolute left-[10%] top-[14%] h-48 w-48 rounded-full bg-emerald-300/18 blur-[100px]"
-        style={{ x: haloX, y: haloY }}
-      />
-      <motion.div
-        className="absolute bottom-[10%] right-[18%] h-56 w-56 rounded-full bg-gold/14 blur-[120px]"
-        style={{ x: secondaryHaloX, y: secondaryHaloY }}
-      />
-      <motion.div
-        className="absolute inset-x-[12%] top-[16%] h-56 rounded-full bg-[radial-gradient(circle,rgba(130,255,186,0.14),transparent_68%)] blur-[90px]"
-        style={{ y: mistY }}
-      />
+      {!reduceMotion && <motion.div className="absolute inset-0 opacity-90" style={{ backgroundImage: radialGlow }} />}
+      {!reduceMotion && (
+        <>
+          <motion.div
+            className="absolute left-[10%] top-[14%] h-48 w-48 rounded-full bg-emerald-300/18 blur-[100px]"
+            style={{ x: haloX, y: haloY }}
+          />
+          <motion.div
+            className="absolute bottom-[10%] right-[18%] h-56 w-56 rounded-full bg-gold/14 blur-[120px]"
+            style={{ x: secondaryHaloX, y: secondaryHaloY }}
+          />
+          <motion.div
+            className="absolute inset-x-[12%] top-[16%] h-56 rounded-full bg-[radial-gradient(circle,rgba(130,255,186,0.14),transparent_68%)] blur-[90px]"
+            style={{ y: mistY }}
+          />
+        </>
+      )}
       <div className="ambient-line left-[8%] top-[18%] w-[18rem]" />
       <div className="ambient-line right-[8%] top-[72%] w-[22rem]" />
-      <motion.div style={{ y: branchY }} className="absolute inset-0">
-        <TreeBranch className="top-[2%]" />
-      </motion.div>
-      <NatureBackdrop variant="hero" />
-      <FantasyGarden mode="hero" />
-      <FloatingLeaves />
+      {!reduceMotion && (
+        <>
+          <motion.div style={{ y: branchY }} className="absolute inset-0">
+            <TreeBranch className="top-[2%]" />
+          </motion.div>
+          <div className="hidden md:block">
+            <NatureBackdrop variant="hero" />
+            <FantasyGarden mode="hero" />
+            <FloatingLeaves />
+          </div>
+        </>
+      )}
 
       <motion.div className="section-shell relative z-[4] flex min-h-screen items-center py-24 sm:py-28" style={{ y: contentY }}>
         <div className="max-w-4xl">

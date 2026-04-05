@@ -1,9 +1,14 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 
 export function ParallaxBackground() {
+  const reduceMotion = useReducedMotion();
   const { scrollY } = useScroll();
+
+  if (reduceMotion) {
+    return null;
+  }
 
   const orbOneY = useTransform(scrollY, [0, 3000], [0, -320]);
   const orbTwoY = useTransform(scrollY, [0, 3000], [0, 240]);

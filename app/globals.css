@@ -24,6 +24,7 @@ body {
     radial-gradient(circle at 85% 20%, rgba(212, 175, 104, 0.12), transparent 18%),
     linear-gradient(180deg, #030503 0%, #08110d 34%, #102119 62%, #0a1510 100%);
   background-attachment: fixed;
+  overflow-x: hidden;
 }
 
 .snap-section {
@@ -135,6 +136,7 @@ a {
   filter: blur(28px);
   opacity: 0.45;
   pointer-events: none;
+  will-change: transform, opacity;
 }
 
 .parallax-orb {
@@ -142,6 +144,7 @@ a {
   border-radius: 9999px;
   pointer-events: none;
   filter: blur(50px);
+  will-change: transform, opacity;
 }
 
 .parallax-grid {
@@ -154,6 +157,7 @@ a {
   background-size: 100px 100px;
   mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.7), transparent 78%);
   opacity: 0.28;
+  will-change: transform;
 }
 
 .parallax-streak {
@@ -162,6 +166,7 @@ a {
   pointer-events: none;
   background: linear-gradient(90deg, transparent, rgba(125, 227, 158, 0.4), rgba(212, 175, 104, 0.35), transparent);
   opacity: 0.55;
+  will-change: transform;
 }
 
 .site-parallax-orb {
@@ -170,6 +175,7 @@ a {
   pointer-events: none;
   filter: blur(80px);
   opacity: 0.9;
+  will-change: transform, opacity;
 }
 
 .site-parallax-grid {
@@ -182,6 +188,7 @@ a {
   background-size: 140px 140px;
   mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.72), transparent 82%);
   opacity: 0.2;
+  will-change: transform;
 }
 
 .site-parallax-band {
@@ -192,6 +199,7 @@ a {
   background: linear-gradient(90deg, rgba(29, 94, 53, 0.18), rgba(212, 175, 104, 0.08), rgba(29, 94, 53, 0.18));
   filter: blur(90px);
   opacity: 0.5;
+  will-change: transform;
 }
 
 .site-parallax-foliage {
@@ -201,6 +209,7 @@ a {
   height: 40rem;
   opacity: 0.7;
   filter: blur(0.2px) drop-shadow(0 16px 40px rgba(0, 0, 0, 0.28));
+  will-change: transform;
 }
 
 .site-parallax-foliage::before,
@@ -255,6 +264,7 @@ a {
   border-radius: 9999px;
   background: radial-gradient(circle, rgba(175, 255, 194, 0.55), rgba(175, 255, 194, 0.08), transparent 75%);
   filter: blur(1px);
+  will-change: transform, opacity;
 }
 
 .flora-stem {
@@ -309,6 +319,63 @@ a {
 @media (min-width: 768px) {
   .masonry-grid {
     column-count: 2;
+  }
+}
+
+@media (max-width: 1024px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  html {
+    scroll-snap-type: none;
+  }
+
+  .site-parallax-grid,
+  .site-parallax-band,
+  .site-parallax-foliage,
+  .site-parallax-particle,
+  .parallax-grid,
+  .parallax-streak {
+    display: none;
+  }
+
+  .site-parallax-orb {
+    filter: blur(52px);
+    opacity: 0.45;
+  }
+
+  .parallax-orb {
+    filter: blur(32px);
+    opacity: 0.18;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+    scroll-snap-type: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .site-parallax-grid,
+  .site-parallax-band,
+  .site-parallax-foliage,
+  .site-parallax-particle,
+  .parallax-grid,
+  .parallax-streak,
+  .site-parallax-orb,
+  .parallax-orb,
+  .leaf-glow {
+    display: none;
   }
 }
 

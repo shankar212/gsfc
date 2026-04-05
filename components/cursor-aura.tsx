@@ -1,9 +1,10 @@
 "use client";
 
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
 import { useEffect } from "react";
 
 export function CursorAura() {
+  const reduceMotion = useReducedMotion();
   const x = useMotionValue(-200);
   const y = useMotionValue(-200);
 
@@ -11,6 +12,10 @@ export function CursorAura() {
   const smoothY = useSpring(y, { damping: 30, stiffness: 140, mass: 0.3 });
 
   useEffect(() => {
+    if (reduceMotion) {
+      return;
+    }
+
     const handleMove = (event: MouseEvent) => {
       x.set(event.clientX - 120);
       y.set(event.clientY - 120);
@@ -18,7 +23,11 @@ export function CursorAura() {
 
     window.addEventListener("mousemove", handleMove);
     return () => window.removeEventListener("mousemove", handleMove);
-  }, [x, y]);
+  }, [reduceMotion, x, y]);
+
+  if (reduceMotion) {
+    return null;
+  }
 
   return (
     <motion.div
