@@ -56,7 +56,7 @@ export function MediaSection() {
 
           <div className="hero-card hover-glow-card overflow-hidden rounded-[34px] p-5 sm:p-6">
             <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-              <div className="relative min-h-[22rem] overflow-hidden rounded-[28px] border border-white/10">
+              <div className="relative min-h-[22rem] overflow-hidden rounded-[28px] border border-black/10 dark:border-white/10">
                 <Image
                   src="/images/image9.jpeg"
                   alt="Fantasy media showcase at Gulab Singh Film City"
@@ -65,12 +65,12 @@ export function MediaSection() {
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/25 to-transparent" />
-                <div className="absolute left-5 top-5 inline-flex items-center gap-2 rounded-full border border-gold/25 bg-black/20 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-gold backdrop-blur-xl">
+                <div className="absolute left-5 top-5 inline-flex items-center gap-2 rounded-full border border-gold/25 bg-white/60 dark:bg-black/20 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-gold backdrop-blur-xl">
                   <Sparkles size={14} />
                   Featured Media
                 </div>
                 <div className="absolute inset-x-0 bottom-0 p-6">
-                  <h3 className="max-w-md text-2xl font-semibold text-white">
+                  <h3 className="max-w-md text-2xl font-semibold text-black dark:text-white">
                     Fantasy frames for scenic promos, pre-wedding reels, and event storytelling.
                   </h3>
                 </div>
@@ -78,12 +78,12 @@ export function MediaSection() {
 
               <div className="space-y-4">
                 {mediaFeatures.map(({ icon: Icon, title, copy }) => (
-                  <div key={title} className="rounded-[24px] border border-white/10 bg-white/5 p-5">
+                  <div key={title} className="rounded-[24px] border border-black/10 dark:border-white/10 bg-white/60 dark:bg-black/5 dark:bg-white/5 p-5">
                     <div className="inline-flex rounded-2xl border border-gold/20 bg-gold/10 p-3 text-gold">
                       <Icon size={18} />
                     </div>
-                    <h3 className="mt-4 text-lg font-semibold text-white">{title}</h3>
-                    <p className="mt-2 text-sm leading-7 text-white/66">{copy}</p>
+                    <h3 className="mt-4 text-lg font-semibold text-black dark:text-white">{title}</h3>
+                    <p className="mt-2 text-sm leading-7 text-black/66 dark:text-white/66">{copy}</p>
                   </div>
                 ))}
               </div>
@@ -91,16 +91,16 @@ export function MediaSection() {
           </div>
         </div>
 
-        <div className="mt-10 overflow-hidden rounded-[28px] border border-white/10 bg-white/10 p-4 shadow-glow sm:rounded-[34px] sm:p-5">
+        <div className="mt-10 overflow-hidden rounded-[28px] border border-black/10 dark:border-white/10 bg-white/60 dark:bg-black/5 dark:bg-white/10 p-4 shadow-sm dark:shadow-glow sm:rounded-[34px] sm:p-5">
           <div className="mb-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.28em] text-gold">Video Slides</p>
-              <h3 className="mt-2 text-xl font-semibold text-white sm:text-2xl">Moving visuals from across the venue</h3>
+              <h3 className="mt-2 text-xl font-semibold text-black dark:text-white sm:text-2xl">Moving visuals from across the venue</h3>
             </div>
             <div className="flex items-center gap-3">
               <button
                 type="button"
-                className="rounded-full border border-white/10 bg-white/10 p-3 text-white transition hover:bg-white/15"
+                className="rounded-full border border-black/10 dark:border-white/10 bg-white/60 dark:bg-black/5 dark:bg-white/10 p-3 text-black dark:text-white transition hover:bg-white/15"
                 onClick={prev}
                 aria-label="Previous video"
               >
@@ -108,7 +108,7 @@ export function MediaSection() {
               </button>
               <button
                 type="button"
-                className="rounded-full border border-white/10 bg-white/10 p-3 text-white transition hover:bg-white/15"
+                className="rounded-full border border-black/10 dark:border-white/10 bg-white/60 dark:bg-black/5 dark:bg-white/10 p-3 text-black dark:text-white transition hover:bg-white/15"
                 onClick={next}
                 aria-label="Next video"
               >
@@ -118,7 +118,7 @@ export function MediaSection() {
           </div>
 
           <div className="grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
-            <div className="relative overflow-hidden rounded-[28px] border border-white/10 bg-black/20">
+            <div className="relative overflow-hidden rounded-[28px] border border-black/10 dark:border-white/10 bg-white/60 dark:bg-black/20">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentVideo.src}
@@ -142,14 +142,14 @@ export function MediaSection() {
                   </div>
                   <button
                     type="button"
-                    className="absolute right-4 top-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/35 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white backdrop-blur-xl transition hover:bg-black/50"
+                    className="absolute right-4 top-4 inline-flex items-center gap-2 rounded-full border border-black/10 dark:border-white/15 bg-white/60 dark:bg-black/35 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-black dark:text-white backdrop-blur-xl transition hover:bg-black/50"
                     onClick={() => setShowVideoModal(true)}
                   >
                     <Expand size={14} />
                     Full View
                   </button>
                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent p-5">
-                    <p className="text-xl font-semibold text-white">{currentVideo.title}</p>
+                    <p className="text-xl font-semibold text-black dark:text-white">{currentVideo.title}</p>
                   </div>
                 </motion.div>
               </AnimatePresence>
@@ -163,8 +163,8 @@ export function MediaSection() {
                   onClick={() => setIndex(videoIndex)}
                   className={`min-w-[210px] rounded-[22px] border px-4 py-4 text-left transition lg:min-w-0 ${
                     videoIndex === index
-                      ? "border-gold/35 bg-gold/10 text-white"
-                      : "border-white/10 bg-white/5 text-white/72 hover:bg-white/10"
+                      ? "border-gold/35 bg-gold/10 text-black dark:text-white"
+                      : "border-black/10 dark:border-white/10 bg-white/60 dark:bg-black/5 dark:bg-white/5 text-black/72 dark:text-white/72 hover:bg-white/10"
                   }`}
                 >
                   <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gold/90">
@@ -181,7 +181,7 @@ export function MediaSection() {
           {mediaHighlights.map((item) => (
             <article
               key={item.title}
-              className="group hover-glow-card overflow-hidden rounded-[30px] border border-white/10 bg-white/10 shadow-glass"
+              className="group hover-glow-card overflow-hidden rounded-[30px] border border-black/10 dark:border-white/10 bg-white/60 dark:bg-black/5 dark:bg-white/10 shadow-md dark:shadow-glass"
             >
               <button
                 type="button"
@@ -196,13 +196,13 @@ export function MediaSection() {
                   sizes="(max-width: 1024px) 100vw, 33vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-                <div className="absolute left-4 top-4 rounded-full border border-white/15 bg-black/20 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-white backdrop-blur-xl">
+                <div className="absolute left-4 top-4 rounded-full border border-black/10 dark:border-white/15 bg-white/60 dark:bg-black/20 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-black dark:text-white backdrop-blur-xl">
                   {item.tag}
                 </div>
               </button>
               <div className="p-6">
-                <h3 className="text-xl font-semibold text-white">{item.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-white/66">{item.description}</p>
+                <h3 className="text-xl font-semibold text-black dark:text-white">{item.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-black/66 dark:text-white/66">{item.description}</p>
               </div>
             </article>
           ))}
@@ -212,14 +212,14 @@ export function MediaSection() {
       <AnimatePresence>
         {showVideoModal && (
           <motion.div
-            className="fixed inset-0 z-[90] flex items-center justify-center bg-black/90 p-4 backdrop-blur-xl"
+            className="fixed inset-0 z-[90] flex items-center justify-center bg-white/60 dark:bg-black/90 p-4 backdrop-blur-xl"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setShowVideoModal(false)}
           >
             <motion.div
-              className="relative w-full max-w-6xl overflow-hidden rounded-[32px] border border-white/10 bg-black"
+              className="relative w-full max-w-6xl overflow-hidden rounded-[32px] border border-black/10 dark:border-white/10 bg-mist dark:bg-black"
               initial={{ scale: 0.97, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.97, opacity: 0 }}
@@ -228,7 +228,7 @@ export function MediaSection() {
               <div className="aspect-video">
                 <video
                   src={currentVideo.src}
-                  className="h-full w-full object-contain bg-black"
+                  className="h-full w-full object-contain bg-mist dark:bg-black"
                   controls
                   autoPlay
                   playsInline
@@ -237,7 +237,7 @@ export function MediaSection() {
               <div className="absolute left-4 top-4">
                 <button
                   type="button"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/40 px-4 py-2 text-sm font-medium text-white backdrop-blur-xl"
+                  className="inline-flex items-center gap-2 rounded-full border border-black/10 dark:border-white/15 bg-white/60 dark:bg-black/40 px-4 py-2 text-sm font-medium text-black dark:text-white backdrop-blur-xl"
                   onClick={() => setShowVideoModal(false)}
                 >
                   <ArrowLeft size={16} />
@@ -250,26 +250,26 @@ export function MediaSection() {
 
         {activeImage && (
           <motion.div
-            className="fixed inset-0 z-[90] flex items-center justify-center bg-black/90 p-4 backdrop-blur-xl"
+            className="fixed inset-0 z-[90] flex items-center justify-center bg-white/60 dark:bg-black/90 p-4 backdrop-blur-xl"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setActiveImage(null)}
           >
             <motion.div
-              className="relative w-full max-w-6xl overflow-hidden rounded-[32px] border border-white/10"
+              className="relative w-full max-w-6xl overflow-hidden rounded-[32px] border border-black/10 dark:border-white/10"
               initial={{ scale: 0.97, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.97, opacity: 0 }}
               onClick={(event) => event.stopPropagation()}
             >
               <div className="relative aspect-[16/10]">
-                <Image src={activeImage.image} alt={activeImage.title} fill className="object-contain bg-black" sizes="100vw" />
+                <Image src={activeImage.image} alt={activeImage.title} fill className="object-contain bg-mist dark:bg-black" sizes="100vw" />
               </div>
               <div className="absolute left-4 top-4">
                 <button
                   type="button"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/40 px-4 py-2 text-sm font-medium text-white backdrop-blur-xl"
+                  className="inline-flex items-center gap-2 rounded-full border border-black/10 dark:border-white/15 bg-white/60 dark:bg-black/40 px-4 py-2 text-sm font-medium text-black dark:text-white backdrop-blur-xl"
                   onClick={() => setActiveImage(null)}
                 >
                   <ArrowLeft size={16} />

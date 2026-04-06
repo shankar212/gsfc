@@ -39,7 +39,7 @@ export function GallerySection() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent opacity-90 transition group-hover:opacity-100" />
               <div className="absolute inset-x-0 bottom-0 p-5 text-left">
-                <p className="text-lg font-semibold text-white">{item.title}</p>
+                <p className="text-lg font-semibold text-black dark:text-white">{item.title}</p>
               </div>
             </button>
           ))}
@@ -49,14 +49,14 @@ export function GallerySection() {
       <AnimatePresence>
         {activeImage && (
           <motion.div
-            className="fixed inset-0 z-[80] flex items-center justify-center bg-black/85 p-4 backdrop-blur-xl"
+            className="fixed inset-0 z-[80] flex items-center justify-center bg-white/60 dark:bg-black/85 p-4 backdrop-blur-xl"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setActiveImage(null)}
           >
             <motion.div
-              className="relative w-full max-w-5xl overflow-hidden rounded-[32px] border border-white/10"
+              className="relative w-full max-w-5xl overflow-hidden rounded-[32px] border border-black/10 dark:border-white/10"
               initial={{ scale: 0.96, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.96, opacity: 0 }}
@@ -66,11 +66,11 @@ export function GallerySection() {
                 <Image src={activeImage.image} alt={activeImage.title} fill className="object-cover" sizes="100vw" />
               </div>
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent p-6">
-                <p className="text-2xl font-semibold text-white">{activeImage.title}</p>
+                <p className="text-2xl font-semibold text-black dark:text-white">{activeImage.title}</p>
               </div>
               <button
                 type="button"
-                className="absolute right-4 top-4 rounded-full border border-white/20 bg-black/30 p-3 text-white"
+                className="absolute right-4 top-4 rounded-full border border-black/10 dark:border-white/20 bg-white/60 dark:bg-black/30 p-3 text-black dark:text-white"
                 onClick={() => setActiveImage(null)}
                 aria-label="Close gallery preview"
               >

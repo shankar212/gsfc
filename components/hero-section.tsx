@@ -69,7 +69,7 @@ export function HeroSection() {
           <source src={contactInfo.heroVideo} type="video/mp4" />
         </video>
       </motion.div>
-      <div className="absolute inset-0 bg-hero-overlay" />
+      <div className="absolute inset-0 bg-white/50 dark:bg-hero-overlay" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(212,175,104,0.16),transparent_26%)]" />
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(2,8,5,0.15),rgba(2,8,5,0.66))]" />
       {!disableHeavyMotion && <motion.div className="absolute inset-0 opacity-90" style={{ backgroundImage: radialGlow }} />}
@@ -125,7 +125,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="mt-5 max-w-4xl text-[2.9rem] font-semibold leading-[0.98] text-white sm:mt-6 sm:text-6xl lg:text-8xl"
+            className="mt-5 max-w-4xl text-[2.9rem] font-semibold leading-[0.98] text-black dark:text-white sm:mt-6 sm:text-6xl lg:text-8xl"
           >
             Gulab Singh Film City
           </motion.h1>
@@ -144,7 +144,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mt-5 max-w-2xl text-base leading-7 text-white/80 sm:mt-6 sm:text-xl sm:leading-8"
+            className="mt-5 max-w-2xl text-base leading-7 text-black/80 dark:text-white/80 sm:mt-6 sm:text-xl sm:leading-8"
           >
             A Perfect Destination for Shoots & Events
           </motion.p>
@@ -154,7 +154,7 @@ export function HeroSection() {
             transition={{ duration: 0.9, delay: 0.24 }}
             className="mt-5 max-w-xl rounded-[22px] border border-emerald-200/10 bg-emerald-950/18 px-4 py-4 backdrop-blur-xl sm:mt-6 sm:rounded-[26px] sm:px-5"
           >
-            <p className="text-sm leading-6 text-white/68 sm:leading-7">
+            <p className="text-sm leading-6 text-black/68 dark:text-white/68 sm:leading-7">
               Enter a magical world of scenic park views, fantasy greenery, reflective water edges, and premium open-air spaces crafted for shoots, celebrations, and unforgettable moments.
             </p>
           </motion.div>
@@ -188,8 +188,8 @@ export function HeroSection() {
                 whileHover={{ y: -8, scale: 1.02 }}
                 className="hero-card hover-glow-card rounded-[22px] p-4"
               >
-                <p className="text-sm font-semibold text-white">{title}</p>
-                <p className="mt-2 text-sm text-white/65">{copy}</p>
+                <p className="text-sm font-semibold text-black dark:text-white">{title}</p>
+                <p className="mt-2 text-sm text-black/65 dark:text-white/65">{copy}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -203,19 +203,19 @@ export function HeroSection() {
           style={{ x: panelX, y: panelOffsetY }}
         >
           <div className="hero-card hover-glow-card rounded-[36px] p-6">
-            <div className="rounded-[28px] border border-emerald-100/10 bg-black/25 p-6">
+            <div className="rounded-[28px] border border-emerald-100/10 bg-white/60 dark:bg-black/25 p-6">
               <p className="text-xs uppercase tracking-[0.34em] text-gold">Visual Signature</p>
-              <h3 className="mt-4 text-2xl font-semibold text-white">
+              <h3 className="mt-4 text-2xl font-semibold text-black dark:text-white">
                 A dreamlike backdrop where greenery, light, and water move like a scene.
               </h3>
-              <p className="mt-4 text-sm leading-7 text-white/68">
+              <p className="mt-4 text-sm leading-7 text-black/68 dark:text-white/68">
                 Layered foliage glow, cinematic depth, and premium outdoor textures help every frame feel richer before the camera even rolls.
               </p>
               <div className="mt-6 grid gap-3">
                 {["Living gardens", "Reflective water edges", "Golden-hour fantasy mood"].map((item) => (
                   <div
                     key={item}
-                    className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/84"
+                    className="rounded-2xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-black/5 dark:bg-white/5 px-4 py-3 text-sm text-black/84 dark:text-white/84"
                   >
                     {item}
                   </div>
@@ -231,7 +231,7 @@ export function HeroSection() {
         initial={{ opacity: 0, y: -12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ repeat: Infinity, repeatType: "mirror", duration: 1.6 }}
-        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-sm text-white/78 sm:flex"
+        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-sm text-black/78 dark:text-white/78 sm:flex"
       >
         <span>Scroll</span>
         <ChevronDown className="animate-float" size={18} />

@@ -1,7 +1,8 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, Moon, Sun, X } from "lucide-react";
+import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
 import { navItems } from "@/lib/content";
@@ -9,8 +10,11 @@ import { navItems } from "@/lib/content";
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => setScrolled(window.scrollY > 24);
 
     handleScroll();
@@ -21,7 +25,7 @@ export function Navbar() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        scrolled ? "bg-black/70 py-3 shadow-glass backdrop-blur-2xl" : "bg-transparent py-4 sm:py-5"
+        scrolled ? "bg-white/60 dark:bg-black/70 py-3 shadow-md dark:shadow-glass backdrop-blur-2xl" : "bg-transparent py-4 sm:py-5"
       }`}
     >
       <nav className="section-shell flex items-center justify-between gap-3">
@@ -31,7 +35,7 @@ export function Navbar() {
           </div>
           <div className="min-w-0">
             <p className="hidden text-sm font-semibold uppercase tracking-[0.3em] text-gold sm:block">Film City</p>
-            <p className="truncate pr-1 text-sm font-semibold text-white sm:text-base">Gulab Singh</p>
+            <p className="truncate pr-1 text-sm font-semibold text-black dark:text-white sm:text-base">Gulab Singh</p>
           </div>
         </a>
 
@@ -40,7 +44,7 @@ export function Navbar() {
             <a
               key={item.href}
               href={item.href}
-              className="relative text-sm font-medium text-white/78 transition hover:text-white after:absolute after:-bottom-2 after:left-0 after:h-px after:w-0 after:bg-gold after:transition-all after:duration-300 hover:after:w-full"
+              className="relative text-sm font-medium text-black/78 dark:text-white/78 transition hover:text-black dark:hover:text-white after:absolute after:-bottom-2 after:left-0 after:h-px after:w-0 after:bg-gold after:transition-all after:duration-300 hover:after:w-full"
             >
               {item.label}
             </a>
@@ -48,16 +52,36 @@ export function Navbar() {
           <a href="#inquiry" className="glow-button">
             Book Now
           </a>
+          {mounted && (
+            <button
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="inline-flex shrink-0 rounded-full border border-black/10 dark:border-white/15 bg-black/5 dark:bg-white/10 p-2.5 text-black dark:text-white transition hover:bg-black/10 dark:hover:bg-white/20"
+              aria-label="Toggle theme"
+            >
+              {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+          )}
         </div>
 
-        <button
-          type="button"
-          className="inline-flex shrink-0 rounded-full border border-white/15 bg-white/10 p-2.5 text-white lg:hidden"
-          onClick={() => setOpen((value) => !value)}
-          aria-label="Toggle menu"
-        >
-          {open ? <X size={20} /> : <Menu size={20} />}
-        </button>
+        <div className="flex items-center gap-3 lg:hidden">
+          {mounted && (
+            <button
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="inline-flex shrink-0 rounded-full border border-black/10 dark:border-white/15 bg-black/5 dark:bg-white/10 p-2 text-black dark:text-white"
+              aria-label="Toggle theme"
+            >
+              {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+          )}
+          <button
+            type="button"
+            className="inline-flex shrink-0 rounded-full border border-black/10 dark:border-white/15 bg-black/5 dark:bg-white/10 p-2.5 text-black dark:text-white lg:hidden"
+            onClick={() => setOpen((value) => !value)}
+            aria-label="Toggle menu"
+          >
+            {open ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
       </nav>
 
       <AnimatePresence>
@@ -74,7 +98,7 @@ export function Navbar() {
                   <a
                     key={item.href}
                     href={item.href}
-                    className="text-sm font-medium text-white/85"
+                    className="text-sm font-medium text-black/85 dark:text-white/85"
                     onClick={() => setOpen(false)}
                   >
                     {item.label}

@@ -34,7 +34,7 @@ export function LocationsSection() {
             <motion.article
               key={card.title}
               whileHover={{ y: -10 }}
-              className="group hover-glow-card overflow-hidden rounded-[30px] border border-white/10 bg-white/10 shadow-glass"
+              className="group hover-glow-card overflow-hidden rounded-[30px] border border-black/10 dark:border-white/10 bg-white/60 dark:bg-black/5 dark:bg-white/10 shadow-md dark:shadow-glass"
             >
               <div className="relative h-80 overflow-hidden">
                 <Image
@@ -51,8 +51,8 @@ export function LocationsSection() {
                 <div className="inline-flex rounded-full border border-gold/20 bg-gold/10 p-3 text-gold">
                   <MapPinned size={18} />
                 </div>
-                <h3 className="text-xl font-semibold text-white">{card.title}</h3>
-                <p className="text-sm leading-7 text-white/68">{card.description}</p>
+                <h3 className="text-xl font-semibold text-black dark:text-white">{card.title}</h3>
+                <p className="text-sm leading-7 text-black/68 dark:text-white/68">{card.description}</p>
               </div>
             </motion.article>
           ))}

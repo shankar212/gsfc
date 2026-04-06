@@ -48,7 +48,7 @@ export function AboutSection() {
               title="A scenic film city crafted for stories, celebrations, and unforgettable frames."
               description="Gulab Singh Film City in Adilabad blends cinematic landscapes, open-air sets, lush gardens, and premium event-ready spaces into one destination built for visual impact."
             />
-            <div className="mt-8 overflow-hidden rounded-[32px] border border-white/10 bg-white/10 p-3 shadow-glow">
+            <div className="mt-8 overflow-hidden rounded-[32px] border border-black/10 dark:border-white/10 bg-white/60 dark:bg-black/5 dark:bg-white/10 p-3 shadow-sm dark:shadow-glow">
               <div className="grid gap-3 sm:grid-cols-[1.2fr_0.8fr]">
                 <div className="relative min-h-[22rem] overflow-hidden rounded-[26px]">
                   <Image
@@ -90,8 +90,8 @@ export function AboutSection() {
                     <Icon size={24} />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-white">{title}</h3>
-                    <p className="mt-2 text-sm leading-7 text-white/68">{description}</p>
+                    <h3 className="text-xl font-semibold text-black dark:text-white">{title}</h3>
+                    <p className="mt-2 text-sm leading-7 text-black/68 dark:text-white/68">{description}</p>
                   </div>
                 </div>
               </div>

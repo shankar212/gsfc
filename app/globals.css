@@ -2,8 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+:root, .dark {
   color-scheme: dark;
+  --bg-gradient: radial-gradient(circle at top, rgba(28, 71, 51, 0.48), transparent 35%),
+                 radial-gradient(circle at 85% 20%, rgba(212, 175, 104, 0.12), transparent 18%),
+                 linear-gradient(180deg, #030503 0%, #08110d 34%, #102119 62%, #0a1510 100%);
+  --bg-overlay: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.08), transparent 20%),
+                radial-gradient(circle at 80% 0%, rgba(255, 255, 255, 0.04), transparent 24%),
+                repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.015) 0, rgba(255, 255, 255, 0.015) 1px, transparent 1px, transparent 3px);
+}
+
+.light {
+  color-scheme: light;
+  --bg-gradient: radial-gradient(circle at top, rgba(167, 243, 208, 0.28), transparent 35%),
+                 radial-gradient(circle at 85% 20%, rgba(212, 175, 104, 0.12), transparent 18%),
+                 linear-gradient(180deg, #f0fdf4 0%, #ffffff 34%, #f8fafc 62%, #f1f5f9 100%);
+  --bg-overlay: radial-gradient(circle at 20% 20%, rgba(0, 0, 0, 0.02), transparent 20%),
+                radial-gradient(circle at 80% 0%, rgba(0, 0, 0, 0.01), transparent 24%),
+                repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.015) 0, rgba(0, 0, 0, 0.015) 1px, transparent 1px, transparent 3px);
 }
 
 * {
@@ -20,10 +36,7 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  background:
-    radial-gradient(circle at top, rgba(28, 71, 51, 0.48), transparent 35%),
-    radial-gradient(circle at 85% 20%, rgba(212, 175, 104, 0.12), transparent 18%),
-    linear-gradient(180deg, #030503 0%, #08110d 34%, #102119 62%, #0a1510 100%);
+  background: var(--bg-gradient);
   background-attachment: fixed;
   overflow-x: hidden;
 }
@@ -36,16 +49,7 @@ body::before {
   z-index: 1;
   opacity: 0.2;
   will-change: transform;
-  background-image:
-    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.08), transparent 20%),
-    radial-gradient(circle at 80% 0%, rgba(255, 255, 255, 0.04), transparent 24%),
-    repeating-linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 0.015) 0,
-      rgba(255, 255, 255, 0.015) 1px,
-      transparent 1px,
-      transparent 3px
-    );
+  background-image: var(--bg-overlay);
   mix-blend-mode: soft-light;
 }
 
@@ -55,7 +59,7 @@ a {
 }
 
 .glass-panel {
-  @apply border border-white/10 bg-white/10 backdrop-blur-xl shadow-glass;
+  @apply border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/10 backdrop-blur-xl shadow-glass;
 }
 
 .section-shell {
@@ -72,7 +76,7 @@ a {
 }
 
 .soft-card {
-  @apply rounded-[28px] border border-white/10 bg-white/10 backdrop-blur-md shadow-glow;
+  @apply rounded-[28px] border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/10 backdrop-blur-md shadow-glow;
 }
 
 .fantasy-grid {
@@ -104,7 +108,7 @@ a {
 }
 
 .ghost-button {
-  @apply glass-panel relative overflow-hidden rounded-full px-7 py-4 text-center text-sm font-semibold text-white transition duration-300 hover:scale-[1.03] hover:bg-white/15;
+  @apply glass-panel relative overflow-hidden rounded-full px-7 py-4 text-center text-sm font-semibold text-black dark:text-white transition duration-300 hover:scale-[1.03] hover:bg-black/10 dark:hover:bg-white/15;
 }
 
 .hover-glow-card {

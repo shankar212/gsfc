@@ -21,7 +21,7 @@ export function InquirySection() {
   return (
     <AnimatedSection id="inquiry" className="py-24 sm:py-28">
       <div className="section-shell">
-        <div className="grid gap-8 overflow-hidden rounded-[30px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.1),rgba(19,59,43,0.32))] p-4 shadow-glow sm:gap-10 sm:rounded-[36px] sm:p-6 lg:grid-cols-[0.9fr_1.1fr] lg:p-10">
+        <div className="grid gap-8 overflow-hidden rounded-[30px] border border-black/10 dark:border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.1),rgba(19,59,43,0.32))] p-4 shadow-sm dark:shadow-glow sm:gap-10 sm:rounded-[36px] sm:p-6 lg:grid-cols-[0.9fr_1.1fr] lg:p-10">
           <div className="min-w-0">
             <SectionHeading
               tag="Inquiry"
@@ -41,17 +41,17 @@ export function InquirySection() {
                 required
                 type="text"
                 placeholder="Name"
-                className="block w-full min-w-0 max-w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-4 text-sm text-white outline-none transition placeholder:text-white/40 focus:border-gold/40"
+                className="block w-full min-w-0 max-w-full rounded-2xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-black/20 px-4 py-4 text-sm text-black dark:text-white outline-none transition placeholder:text-white/40 focus:border-gold/40"
               />
               <input
                 required
                 type="tel"
                 placeholder="Phone"
-                className="block w-full min-w-0 max-w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-4 text-sm text-white outline-none transition placeholder:text-white/40 focus:border-gold/40"
+                className="block w-full min-w-0 max-w-full rounded-2xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-black/20 px-4 py-4 text-sm text-black dark:text-white outline-none transition placeholder:text-white/40 focus:border-gold/40"
               />
               <select
                 required
-                className="block w-full min-w-0 max-w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-4 text-sm text-white outline-none transition focus:border-gold/40"
+                className="block w-full min-w-0 max-w-full rounded-2xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-black/20 px-4 py-4 text-sm text-black dark:text-white outline-none transition focus:border-gold/40"
                 defaultValue=""
               >
                 <option value="" disabled>
@@ -66,7 +66,7 @@ export function InquirySection() {
                 required
                 placeholder="Message"
                 rows={5}
-                className="block w-full min-w-0 max-w-full resize-none rounded-2xl border border-white/10 bg-black/20 px-4 py-4 text-sm text-white outline-none transition placeholder:text-white/40 focus:border-gold/40"
+                className="block w-full min-w-0 max-w-full resize-none rounded-2xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-black/20 px-4 py-4 text-sm text-black dark:text-white outline-none transition placeholder:text-white/40 focus:border-gold/40"
               />
               <button
                 type="submit"

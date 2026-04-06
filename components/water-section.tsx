@@ -17,7 +17,7 @@ export function WaterSection() {
           />
           <div className="grid gap-6 md:grid-cols-2">
             {waterActivities.map((item) => (
-              <div key={item.title} className="overflow-hidden rounded-[28px] border border-white/10 bg-white/10">
+              <div key={item.title} className="overflow-hidden rounded-[28px] border border-black/10 dark:border-white/10 bg-white/60 dark:bg-black/5 dark:bg-white/10">
                 <div className="relative h-80">
                   <Image
                     src={item.image}
@@ -32,8 +32,8 @@ export function WaterSection() {
                   <div className="inline-flex rounded-full border border-gold/20 bg-gold/10 p-3 text-gold">
                     <Waves size={18} />
                   </div>
-                  <h3 className="mt-4 text-xl font-semibold text-white">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-white/68">{item.description}</p>
+                  <h3 className="mt-4 text-xl font-semibold text-black dark:text-white">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-black/68 dark:text-white/68">{item.description}</p>
                 </div>
               </div>
             ))}

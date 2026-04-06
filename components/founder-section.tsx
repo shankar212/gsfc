@@ -10,7 +10,7 @@ export function FounderSection() {
     <AnimatedSection className="py-24 sm:py-28">
       <div className="section-shell">
         <div className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
-          <div className="overflow-hidden rounded-[34px] border border-white/10 bg-white/10 p-3 shadow-glow">
+          <div className="overflow-hidden rounded-[34px] border border-black/10 dark:border-white/10 bg-white/60 dark:bg-black/5 dark:bg-white/10 p-3 shadow-sm dark:shadow-glow">
             <div className="relative aspect-[4/5] overflow-hidden rounded-[28px]">
               <Image
                 src={founderMessage.image}
@@ -29,11 +29,11 @@ export function FounderSection() {
               title="A destination imagined as a living scenic world for shoots, memories, and celebrations."
               description="The heart behind Gulab Singh Film City is not just creating a venue, but crafting an experience that feels magical, scenic, and welcoming for every visitor."
             />
-            <div className="mt-8 rounded-[28px] border border-white/10 bg-black/20 p-6">
+            <div className="mt-8 rounded-[28px] border border-black/10 dark:border-white/10 bg-white/60 dark:bg-black/20 p-6">
               <Quote className="text-gold/75" size={34} />
-              <p className="mt-5 text-lg leading-9 text-white/84">{founderMessage.quote}</p>
+              <p className="mt-5 text-lg leading-9 text-black/84 dark:text-white/84">{founderMessage.quote}</p>
               <div className="mt-8">
-                <p className="text-xl font-semibold text-white">{founderMessage.name}</p>
+                <p className="text-xl font-semibold text-black dark:text-white">{founderMessage.name}</p>
                 <p className="text-sm uppercase tracking-[0.24em] text-gold">{founderMessage.role}</p>
               </div>
             </div>

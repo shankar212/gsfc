@@ -3,6 +3,8 @@ import { Poppins } from "next/font/google";
 
 import "./globals.css";
 
+import { ThemeProvider } from "@/components/theme-provider";
+
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
@@ -26,9 +28,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className={`${poppins.variable} bg-background font-sans text-white antialiased`}>
-        {children}
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+      <body className={`${poppins.variable} bg-mist dark:bg-background font-sans text-black dark:text-white antialiased`}>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

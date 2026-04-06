@@ -49,8 +49,8 @@ export function ServicesSection() {
               <div className="inline-flex rounded-2xl border border-gold/20 bg-gold/10 p-3 text-gold">
                 <Icon size={22} />
               </div>
-              <h3 className="mt-5 text-xl font-semibold text-white">{title}</h3>
-              <p className="mt-3 text-sm leading-7 text-white/68">{copy}</p>
+              <h3 className="mt-5 text-xl font-semibold text-black dark:text-white">{title}</h3>
+              <p className="mt-3 text-sm leading-7 text-black/68 dark:text-white/68">{copy}</p>
             </motion.div>
           ))}
         </div>

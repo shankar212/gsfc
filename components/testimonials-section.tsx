@@ -34,7 +34,7 @@ export function TestimonialsSection() {
 
           <motion.div
             whileHover={{ y: -8 }}
-            className="hover-glow-card relative overflow-hidden rounded-[34px] border border-white/10 bg-white/10 p-6 shadow-glow sm:p-8"
+            className="hover-glow-card relative overflow-hidden rounded-[34px] border border-black/10 dark:border-white/10 bg-white/60 dark:bg-black/5 dark:bg-white/10 p-6 shadow-sm dark:shadow-glow sm:p-8"
           >
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(90,255,150,0.14),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(212,175,104,0.14),transparent_30%)]" />
             <Quote className="text-gold/70" size={38} />
@@ -47,9 +47,9 @@ export function TestimonialsSection() {
                 transition={{ duration: 0.45 }}
                 className="mt-6"
               >
-                <p className="text-xl leading-9 text-white/88">{testimonials[index].quote}</p>
+                <p className="text-xl leading-9 text-black/88 dark:text-white/88">{testimonials[index].quote}</p>
                 <div className="mt-8">
-                  <p className="text-lg font-semibold text-white">{testimonials[index].name}</p>
+                  <p className="text-lg font-semibold text-black dark:text-white">{testimonials[index].name}</p>
                   <p className="text-sm text-gold">{testimonials[index].role}</p>
                 </div>
               </motion.div>
@@ -58,7 +58,7 @@ export function TestimonialsSection() {
             <div className="mt-8 flex items-center gap-3">
               <button
                 type="button"
-                className="rounded-full border border-white/10 bg-white/10 p-3 text-white transition hover:bg-white/15"
+                className="rounded-full border border-black/10 dark:border-white/10 bg-white/60 dark:bg-black/5 dark:bg-white/10 p-3 text-black dark:text-white transition hover:bg-white/15"
                 onClick={prev}
                 aria-label="Previous testimonial"
               >
@@ -66,7 +66,7 @@ export function TestimonialsSection() {
               </button>
               <button
                 type="button"
-                className="rounded-full border border-white/10 bg-white/10 p-3 text-white transition hover:bg-white/15"
+                className="rounded-full border border-black/10 dark:border-white/10 bg-white/60 dark:bg-black/5 dark:bg-white/10 p-3 text-black dark:text-white transition hover:bg-white/15"
                 onClick={next}
                 aria-label="Next testimonial"
               >

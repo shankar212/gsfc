@@ -26,8 +26,8 @@ export function ContactSection() {
                     <PhoneCall size={20} />
                   </div>
                   <div>
-                    <p className="text-sm uppercase tracking-[0.2em] text-white/45">Phone</p>
-                    <p className="mt-2 text-lg font-semibold text-white">{contactInfo.phone}</p>
+                    <p className="text-sm uppercase tracking-[0.2em] text-black/45 dark:text-white/45">Phone</p>
+                    <p className="mt-2 text-lg font-semibold text-black dark:text-white">{contactInfo.phone}</p>
                   </div>
                 </div>
               </div>
@@ -38,8 +38,8 @@ export function ContactSection() {
                     <MapPinned size={20} />
                   </div>
                   <div>
-                    <p className="text-sm uppercase tracking-[0.2em] text-white/45">Address</p>
-                    <p className="mt-2 text-lg font-semibold text-white">{contactInfo.address}</p>
+                    <p className="text-sm uppercase tracking-[0.2em] text-black/45 dark:text-white/45">Address</p>
+                    <p className="mt-2 text-lg font-semibold text-black dark:text-white">{contactInfo.address}</p>
                   </div>
                 </div>
               </div>
@@ -55,7 +55,7 @@ export function ContactSection() {
             </div>
           </div>
 
-          <div className="overflow-hidden rounded-[34px] border border-white/10 bg-white/10 p-3 shadow-glow">
+          <div className="overflow-hidden rounded-[34px] border border-black/10 dark:border-white/10 bg-white/60 dark:bg-black/5 dark:bg-white/10 p-3 shadow-sm dark:shadow-glow">
             <div className="aspect-[5/4] overflow-hidden rounded-[26px]">
               <iframe
                 key={EXACT_MAP_EMBED}
