@@ -63,7 +63,7 @@ export function Footer() {
 
         <div className="mt-10 flex flex-col gap-3 border-t border-black/10 dark:border-white/10 pt-6 text-xs text-black/50 dark:text-white/50 sm:flex-row sm:items-center sm:justify-between">
           <p>Copyright © {currentYear} Gulab Singh Film City. All rights reserved.</p>
-          <p>Designed to showcase scenic shoots, events, and cinematic outdoor experiences.</p>
+          <p>Designed by rathod shanker</p>
         </div>
       </div>
     </footer>

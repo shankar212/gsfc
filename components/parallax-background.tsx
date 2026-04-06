@@ -7,21 +7,10 @@ import { useIsMobile } from "@/hooks/use-is-mobile";
 function MobileParallaxBackground() {
   return (
     <div className="pointer-events-none fixed inset-0 z-[1] overflow-hidden">
-      {/* Lightweight CSS-only animations for buttery smooth mobile graphics (0 CPU hooks) */}
-      <div className="absolute inset-x-0 top-[-6rem] h-[16rem] bg-[radial-gradient(circle,rgba(88,180,112,0.18),transparent_62%)] blur-[40px] animate-parallax-drift-slow" />
-      
-      <div className="site-parallax-orb left-[-4rem] top-[18%] h-44 w-44 bg-emerald-400/16 opacity-30 animate-parallax-float" />
-      <div className="site-parallax-orb right-[-4rem] top-[42%] h-36 w-36 bg-gold/10 opacity-20 animate-parallax-float-delayed" />
-      
-      <div className="site-parallax-particle left-[20%] top-[30%] h-3 w-3 animate-parallax-float" />
-      <div className="site-parallax-particle left-[80%] top-[50%] h-4 w-4 animate-parallax-float-delayed" />
-      <div className="site-parallax-particle left-[40%] top-[70%] h-2 w-2 animate-parallax-rise" />
-
-      <div className="site-forest-layer site-forest-back animate-parallax-rise" />
-      <div className="site-lake-glow animate-lake-glimmer" />
-      
-      <div className="site-parallax-foliage site-foliage-left left-[-2rem] bottom-[-2rem] animate-forest-sway-left" />
-      <div className="site-parallax-foliage site-foliage-right right-[-2rem] bottom-[-3rem] animate-forest-sway-right" />
+      {/* Simplified static background for mobile to save CPU and remove scroll jitter */}
+      <div className="absolute inset-x-0 top-[-6rem] h-[16rem] bg-[radial-gradient(circle,rgba(88,180,112,0.18),transparent_62%)] opacity-60" />
+      <div className="site-forest-layer site-forest-back opacity-50" />
+      <div className="site-lake-glow opacity-30" />
     </div>
   );
 }
