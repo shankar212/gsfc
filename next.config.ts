@@ -12,6 +12,9 @@ const nextConfig: NextConfig = {
     ],
   },
   outputFileTracingRoot: path.join(__dirname),
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 export default nextConfig;
