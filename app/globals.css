@@ -12,7 +12,6 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y proximity;
   scroll-padding-top: 96px;
   overflow-x: hidden;
 }
@@ -26,11 +25,6 @@ body {
     linear-gradient(180deg, #030503 0%, #08110d 34%, #102119 62%, #0a1510 100%);
   background-attachment: fixed;
   overflow-x: hidden;
-}
-
-.snap-section {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
 }
 
 body::before {
@@ -328,10 +322,6 @@ a {
     background-attachment: scroll;
   }
 
-  html {
-    scroll-snap-type: none;
-  }
-
   .site-parallax-grid,
   .site-parallax-band,
   .parallax-grid,
@@ -406,7 +396,6 @@ a {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
-    scroll-snap-type: none;
   }
 
   *,

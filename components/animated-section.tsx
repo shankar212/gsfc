@@ -16,23 +16,23 @@ export function AnimatedSection({ id, className, children }: AnimatedSectionProp
     offset: ["start end", "end start"],
   });
 
-  const orbOneY = useTransform(scrollYProgress, [0, 1], [90, -80]);
-  const orbTwoY = useTransform(scrollYProgress, [0, 1], [-40, 120]);
-  const gridY = useTransform(scrollYProgress, [0, 1], [0, -50]);
-  const streakX = useTransform(scrollYProgress, [0, 1], [-40, 80]);
-  const contentY = useTransform(scrollYProgress, [0, 0.4, 1], [70, 0, -24]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.18, 0.82, 1], [0.18, 1, 1, 0.82]);
-  const contentScale = useTransform(scrollYProgress, [0, 0.35, 1], [0.965, 1, 0.985]);
+  const orbOneY = useTransform(scrollYProgress, [0, 1], [50, -40]);
+  const orbTwoY = useTransform(scrollYProgress, [0, 1], [-24, 64]);
+  const gridY = useTransform(scrollYProgress, [0, 1], [0, -28]);
+  const streakX = useTransform(scrollYProgress, [0, 1], [-18, 36]);
+  const contentY = useTransform(scrollYProgress, [0, 0.25, 1], [24, 0, -10]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.08, 1], [0.78, 1, 1]);
+  const contentScale = useTransform(scrollYProgress, [0, 0.2, 1], [0.99, 1, 1]);
 
   return (
     <motion.section
       ref={ref}
       id={id}
       className={`snap-section relative overflow-hidden ${className ?? ""}`}
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0.88, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
+      viewport={{ once: true, amount: 0.05 }}
+      transition={{ duration: 0.42, ease: "easeOut" }}
     >
       <motion.div className="parallax-grid" style={{ y: gridY }} />
       <motion.div
