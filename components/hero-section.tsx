@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useMotionTemplate, useMotionValue, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { motion, useMotionTemplate, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
 import { ChevronDown, Sparkles } from "lucide-react";
 import { useEffect } from "react";
 
@@ -16,9 +16,9 @@ export function HeroSection() {
   const mouseY = useMotionValue(0);
   const { scrollYProgress } = useScroll();
 
-  const videoY = useTransform(scrollYProgress, [0, 1], [0, 180]);
-  const contentY = useTransform(scrollYProgress, [0, 1], [0, -60]);
-  const sideY = useTransform(scrollYProgress, [0, 1], [0, -90]);
+  const videoRawY = useTransform(scrollYProgress, [0, 1], [0, 160]);
+  const contentRawY = useTransform(scrollYProgress, [0, 1], [0, -44]);
+  const sideRawY = useTransform(scrollYProgress, [0, 1], [0, -72]);
 
   const haloX = useTransform(mouseX, [-0.5, 0.5], [-30, 30]);
   const haloY = useTransform(mouseY, [-0.5, 0.5], [-20, 20]);
@@ -26,9 +26,12 @@ export function HeroSection() {
   const panelY = useTransform(mouseY, [-0.5, 0.5], [-12, 12]);
   const secondaryHaloX = useTransform(haloX, (value) => value * -0.7);
   const secondaryHaloY = useTransform(haloY, (value) => value * -0.6);
+  const videoY = useSpring(videoRawY, { stiffness: 82, damping: 24, mass: 0.6 });
+  const contentY = useSpring(contentRawY, { stiffness: 88, damping: 24, mass: 0.56 });
+  const sideY = useSpring(sideRawY, { stiffness: 88, damping: 24, mass: 0.56 });
   const panelOffsetY = useTransform(() => panelY.get() + sideY.get());
-  const mistY = useTransform(scrollYProgress, [0, 1], [0, -140]);
-  const branchY = useTransform(scrollYProgress, [0, 1], [0, -70]);
+  const mistY = useSpring(useTransform(scrollYProgress, [0, 1], [0, -110]), { stiffness: 78, damping: 22, mass: 0.6 });
+  const branchY = useSpring(useTransform(scrollYProgress, [0, 1], [0, -56]), { stiffness: 82, damping: 24, mass: 0.58 });
 
   const radialGlow = useMotionTemplate`radial-gradient(circle at ${useTransform(mouseX, [-0.5, 0.5], [35, 65])}% ${useTransform(mouseY, [-0.5, 0.5], [30, 60])}%, rgba(75, 255, 145, 0.18), transparent 32%)`;
 

@@ -18,6 +18,9 @@ export function ParallaxBackground() {
   const leftFoliageY = useTransform(scrollY, [0, 3000], [0, -260]);
   const rightFoliageY = useTransform(scrollY, [0, 3000], [0, 180]);
   const canopyY = useTransform(scrollY, [0, 3000], [0, -140]);
+  const lakeY = useTransform(scrollY, [0, 3000], [0, 120]);
+  const forestBackY = useTransform(scrollY, [0, 3000], [0, -70]);
+  const forestFrontY = useTransform(scrollY, [0, 3000], [0, 95]);
 
   return (
     <div className="pointer-events-none fixed inset-0 z-[1] overflow-hidden">
@@ -46,8 +49,12 @@ export function ParallaxBackground() {
         className="site-parallax-band bottom-[14%] right-[-12%] w-[58vw]"
         style={{ y: useTransform(bandY, (value) => value * -0.7), rotate: 12 }}
       />
+      <motion.div className="site-forest-layer site-forest-back" style={{ y: forestBackY }} />
+      <motion.div className="site-lake-glow" style={{ y: lakeY }} />
+      <motion.div className="site-lake-ripple" style={{ y: useTransform(lakeY, (value) => value * 0.65) }} />
       <motion.div className="site-parallax-foliage site-foliage-left left-[-5rem] bottom-[-8rem]" style={{ y: leftFoliageY }} />
       <motion.div className="site-parallax-foliage site-foliage-right right-[-5rem] bottom-[-10rem]" style={{ y: rightFoliageY }} />
+      <motion.div className="site-forest-layer site-forest-front" style={{ y: forestFrontY }} />
       {[
         { left: "16%", top: "22%", size: 14, range: -180 },
         { left: "29%", top: "54%", size: 10, range: 160 },

@@ -36,22 +36,22 @@ export function InquirySection() {
                 Inquiry submitted successfully. We&apos;ll be in touch soon.
               </div>
             )}
-            <form className="grid gap-4" onSubmit={handleSubmit}>
+            <form className="grid min-w-0 gap-4" onSubmit={handleSubmit}>
               <input
                 required
                 type="text"
                 placeholder="Name"
-                className="rounded-2xl border border-white/10 bg-black/20 px-4 py-4 text-sm text-white outline-none transition placeholder:text-white/40 focus:border-gold/40"
+                className="block w-full min-w-0 max-w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-4 text-sm text-white outline-none transition placeholder:text-white/40 focus:border-gold/40"
               />
               <input
                 required
                 type="tel"
                 placeholder="Phone"
-                className="rounded-2xl border border-white/10 bg-black/20 px-4 py-4 text-sm text-white outline-none transition placeholder:text-white/40 focus:border-gold/40"
+                className="block w-full min-w-0 max-w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-4 text-sm text-white outline-none transition placeholder:text-white/40 focus:border-gold/40"
               />
               <select
                 required
-                className="rounded-2xl border border-white/10 bg-black/20 px-4 py-4 text-sm text-white outline-none transition focus:border-gold/40"
+                className="block w-full min-w-0 max-w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-4 text-sm text-white outline-none transition focus:border-gold/40"
                 defaultValue=""
               >
                 <option value="" disabled>
@@ -66,7 +66,7 @@ export function InquirySection() {
                 required
                 placeholder="Message"
                 rows={5}
-                className="rounded-2xl border border-white/10 bg-black/20 px-4 py-4 text-sm text-white outline-none transition placeholder:text-white/40 focus:border-gold/40"
+                className="block w-full min-w-0 max-w-full resize-none rounded-2xl border border-white/10 bg-black/20 px-4 py-4 text-sm text-white outline-none transition placeholder:text-white/40 focus:border-gold/40"
               />
               <button
                 type="submit"
