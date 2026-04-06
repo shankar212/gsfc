@@ -7,10 +7,13 @@ import { useIsMobile } from "@/hooks/use-is-mobile";
 function MobileParallaxBackground() {
   return (
     <div className="pointer-events-none fixed inset-0 z-[1] overflow-hidden">
-      {/* Simplified static background for mobile to save CPU and remove scroll jitter */}
+      {/* Restored scenic layers with zero-latency static positioning */}
       <div className="absolute inset-x-0 top-[-6rem] h-[16rem] bg-[radial-gradient(circle,rgba(88,180,112,0.18),transparent_62%)] opacity-60" />
       <div className="site-forest-layer site-forest-back opacity-50" />
       <div className="site-lake-glow opacity-30" />
+      {/* Beautiful Leaf Overlays without Framer-Motion latency */}
+      <div className="site-parallax-foliage site-foliage-left left-[-6rem] bottom-[-4rem] opacity-70" />
+      <div className="site-parallax-foliage site-foliage-right right-[-6rem] bottom-[-6rem] opacity-70" />
     </div>
   );
 }
