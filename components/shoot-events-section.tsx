@@ -55,13 +55,13 @@ export function ShootEventsSection() {
           videoRef.current.pause();
         }
       },
-      { threshold: 0.55 }
+      { threshold: 0.1 } // Lower threshold solves the tall mobile element issue
     );
 
     observer.observe(frame);
 
     return () => observer.disconnect();
-  }, [index]);
+  }, [index, viewMode]);
 
   return (
     <AnimatedSection className="py-24 sm:py-28">
