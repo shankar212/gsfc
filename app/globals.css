@@ -14,6 +14,7 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 96px;
   overflow-x: hidden;
+  overscroll-behavior-y: none;
 }
 
 body {
@@ -34,6 +35,7 @@ body::before {
   pointer-events: none;
   z-index: 1;
   opacity: 0.2;
+  will-change: transform;
   background-image:
     radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.08), transparent 20%),
     radial-gradient(circle at 80% 0%, rgba(255, 255, 255, 0.04), transparent 24%),
@@ -58,6 +60,7 @@ a {
 
 .section-shell {
   @apply relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  contain: layout style;
 }
 
 .section-copy {

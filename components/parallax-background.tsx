@@ -1,186 +1,105 @@
 "use client";
 
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
+
 import { useIsMobile } from "@/hooks/use-is-mobile";
-import { useEffect, useState } from "react";
 
-// Fixed trees for SSR hydration stability
-const forestTrees = [
-  { x: -10, y: 190, s: 0.8 }, { x: 25, y: 220, s: 1.1 }, { x: 50, y: 180, s: 0.9 },
-  { x: 80, y: 205, s: 0.7 }, { x: 110, y: 175, s: 1.2 }, { x: 140, y: 215, s: 0.8 },
-  { x: 175, y: 185, s: 1.0 }, { x: 200, y: 230, s: 0.9 }, { x: 235, y: 195, s: 1.1 },
-  { x: 270, y: 170, s: 0.8 }, { x: 300, y: 210, s: 1.2 }, { x: 335, y: 190, s: 0.7 },
-  { x: 360, y: 225, s: 1.0 }, { x: 395, y: 185, s: 0.9 }, { x: 420, y: 165, s: 1.1 },
-  { x: 450, y: 205, s: 0.8 }, { x: 485, y: 240, s: 1.3 }, { x: 515, y: 195, s: 0.9 },
-  { x: 545, y: 175, s: 0.7 }, { x: 580, y: 215, s: 1.1 }, { x: 610, y: 185, s: 1.0 },
-  { x: 640, y: 230, s: 0.8 }, { x: 675, y: 190, s: 1.2 }, { x: 705, y: 160, s: 0.9 },
-  { x: 740, y: 210, s: 1.1 }, { x: 770, y: 245, s: 0.7 }, { x: 800, y: 180, s: 1.0 },
-  { x: 835, y: 205, s: 1.3 }, { x: 865, y: 170, s: 0.8 }, { x: 895, y: 220, s: 1.1 },
-  { x: 930, y: 195, s: 0.9 }, { x: 960, y: 185, s: 1.2 }, { x: 990, y: 235, s: 0.7 },
-  { x: 1025, y: 175, s: 1.0 }, { x: 1060, y: 215, s: 0.8 }, { x: 1090, y: 240, s: 1.1 },
-  { x: 1125, y: 190, s: 0.9 }, { x: 1155, y: 165, s: 1.2 }, { x: 1185, y: 210, s: 0.8 },
-  { x: 1215, y: 180, s: 1.0 }
-];
-
-const MountainSVG = ({ className }: { className?: string }) => (
-  <svg className={className} viewBox="0 0 1200 400" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="mountainGrad" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stopColor="#102e21" stopOpacity="0.4"/>
-        <stop offset="100%" stopColor="#08140f" stopOpacity="0.0"/>
-      </linearGradient>
-    </defs>
-    <path d="M0,400 L0,200 L150,80 L350,220 L550,20 L800,260 L1000,110 L1200,230 L1200,400 Z" fill="url(#mountainGrad)" />
-  </svg>
-);
-
-const DistantForestSVG = ({ className }: { className?: string }) => (
-  <svg className={className} viewBox="0 0 1200 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0,300 L0,220 Q200,160 400,210 T800,190 T1200,230 L1200,300 Z" fill="#0c1f16" opacity="0.6" />
-    <g fill="#0c1f16" opacity="0.6">
-      {forestTrees.map((t, i) => (
-        <path key={`df-${i}`} transform={`translate(${t.x}, ${t.y - 30}) scale(${t.s * 0.6})`} d="M20,0 L40,35 L30,35 L50,80 L40,80 L60,140 L0,140 L20,80 L10,80 L30,35 L20,35 Z" />
-      ))}
-    </g>
-  </svg>
-);
-
-const ForegroundForestSVG = ({ className }: { className?: string }) => (
-  <svg className={className} viewBox="0 0 1200 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0,300 L0,250 Q250,210 500,260 T1000,230 L1200,260 L1200,300 Z" fill="#040b08" />
-    <g fill="#040b08">
-      {forestTrees.map((t, i) => (
-        <path key={`ff-${i}`} transform={`translate(${t.x}, ${t.y}) scale(${t.s})`} d="M20,0 L40,35 L30,35 L50,80 L40,80 L60,140 L0,140 L20,80 L10,80 L30,35 L20,35 Z" />
-      ))}
-    </g>
-  </svg>
-);
-
-const LakeSVG = ({ className }: { className?: string }) => (
-  <svg className={className} viewBox="0 0 1200 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="lakeGrad" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stopColor="#4deea7" stopOpacity="0.15"/>
-        <stop offset="30%" stopColor="#1a754b" stopOpacity="0.4"/>
-        <stop offset="100%" stopColor="#08140f" stopOpacity="0.9"/>
-      </linearGradient>
-      <filter id="ripple" x="0" y="0" width="100%" height="100%">
-        <feTurbulence type="fractalNoise" baseFrequency="0.015 0.15" numOctaves="2" result="noise" />
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" xChannelSelector="R" yChannelSelector="B" />
-      </filter>
-    </defs>
-    <rect x="0" y="0" width="1200" height="200" fill="url(#lakeGrad)" filter="url(#ripple)" />
-    {/* Specular highlights */}
-    <ellipse cx="600" cy="50" rx="400" ry="8" fill="#a3ffd0" opacity="0.15" filter="blur(6px)" />
-    <ellipse cx="600" cy="80" rx="200" ry="4" fill="#a3ffd0" opacity="0.1" filter="blur(4px)" />
-  </svg>
-);
-
-function Firefly({ i, scrollYProgress }: { i: number; scrollYProgress: any }) {
-  const yOffset = -50 - (i * 80);
-  const y = useSpring(useTransform(scrollYProgress, [0, 1], [0, yOffset]), { stiffness: 40, damping: 20 });
-  const xOffset = i % 2 === 0 ? 150 : -150;
-  const x = useSpring(useTransform(scrollYProgress, [0, 1], [0, xOffset]), { stiffness: 40, damping: 20 });
-  const scale = useSpring(useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.5, 1]), { stiffness: 50 });
-
+function MobileParallaxBackground() {
   return (
-    <motion.div
-      className="absolute rounded-full bg-gold/50 blur-[2px] will-change-transform"
-      style={{
-        left: `${(i * 5.7) % 100}%`,
-        top: `${30 + (i * 3.3) % 60}%`,
-        width: 3 + (i % 4) * 2,
-        height: 3 + (i % 4) * 2,
-        y,
-        x,
-        scale
-      }}
-      animate={{ opacity: [0.1, 0.9, 0.1] }}
-      transition={{ duration: 4 + (i % 5), repeat: Infinity, ease: "easeInOut" }}
-    />
+    <div className="pointer-events-none fixed inset-0 z-[1] overflow-hidden">
+      <div className="absolute inset-x-0 top-[-6rem] h-[16rem] bg-[radial-gradient(circle,rgba(88,180,112,0.18),transparent_62%)] blur-[72px] animate-parallax-drift-slow" />
+      <div className="site-parallax-orb left-[-4rem] top-[18%] h-44 w-44 bg-emerald-400/16 opacity-30 animate-parallax-float" />
+      <div className="site-parallax-orb right-[-4rem] top-[42%] h-36 w-36 bg-gold/10 opacity-20 animate-parallax-float-delayed" />
+      <div className="site-forest-layer site-forest-back animate-parallax-rise" />
+      <div className="site-lake-glow animate-lake-glimmer" />
+      <div className="site-lake-ripple animate-lake-ripple" />
+      <div className="site-parallax-foliage site-foliage-left left-[-4rem] bottom-[-3rem] animate-forest-sway-left" />
+      <div className="site-parallax-foliage site-foliage-right right-[-4rem] bottom-[-4rem] animate-forest-sway-right" />
+      <div className="site-forest-layer site-forest-front animate-parallax-rise-delayed" />
+    </div>
   );
 }
 
-function GlowingOrb({ i, scrollYProgress }: { i: number; scrollYProgress: any }) {
-  const y = useSpring(useTransform(scrollYProgress, [0, 1], [0, -400 - i * 150]), { stiffness: 30, damping: 25 });
-  const scale = useSpring(useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1.2, 0.8]));
-  
-  return (
-    <motion.div
-      className={`absolute rounded-full blur-[80px] will-change-transform ${i % 2 === 0 ? 'bg-emerald-400/10' : 'bg-gold/10'}`}
-      style={{
-        left: `${(i * 17) % 90}%`,
-        top: `${10 + (i * 13) % 80}%`,
-        width: 200 + (i % 5) * 60,
-        height: 200 + (i % 5) * 60,
-        y,
-        scale
-      }}
-    />
-  );
-}
+function DesktopParallaxBackground() {
+  const { scrollY } = useScroll();
 
-function ScenicParallaxBackground() {
-  const { scrollYProgress } = useScroll();
-  const isMobile = useIsMobile();
-  const [mounted, setMounted] = useState(false);
+  const orbOneY = useSpring(useTransform(scrollY, [0, 3000], [0, -320]), { stiffness: 72, damping: 26, mass: 0.55 });
+  const orbTwoY = useSpring(useTransform(scrollY, [0, 3000], [0, 240]), { stiffness: 72, damping: 26, mass: 0.55 });
+  const orbThreeY = useSpring(useTransform(scrollY, [0, 3000], [0, -200]), { stiffness: 72, damping: 26, mass: 0.55 });
+  const bandY = useSpring(useTransform(scrollY, [0, 3000], [0, -170]), { stiffness: 68, damping: 24, mass: 0.6 });
+  const gridY = useSpring(useTransform(scrollY, [0, 3000], [0, -120]), { stiffness: 68, damping: 24, mass: 0.6 });
+  const leftFoliageY = useSpring(useTransform(scrollY, [0, 3000], [0, -260]), { stiffness: 64, damping: 24, mass: 0.62 });
+  const rightFoliageY = useSpring(useTransform(scrollY, [0, 3000], [0, 180]), { stiffness: 64, damping: 24, mass: 0.62 });
+  const canopyY = useSpring(useTransform(scrollY, [0, 3000], [0, -140]), { stiffness: 68, damping: 24, mass: 0.6 });
+  const lakeY = useSpring(useTransform(scrollY, [0, 3000], [0, 120]), { stiffness: 70, damping: 24, mass: 0.58 });
+  const forestBackY = useSpring(useTransform(scrollY, [0, 3000], [0, -70]), { stiffness: 66, damping: 24, mass: 0.6 });
+  const forestFrontY = useSpring(useTransform(scrollY, [0, 3000], [0, 95]), { stiffness: 66, damping: 24, mass: 0.6 });
+  const bandMirrorY = useTransform(bandY, (value) => value * -0.7);
+  const lakeRippleY = useTransform(lakeY, (value) => value * 0.65);
 
-  useEffect(() => setMounted(true), []);
-
-  // Parallax calculations mapped 0 to 1 scaling across the entire page depth!
-  const mountainY = useSpring(useTransform(scrollYProgress, [0, 1], [0, isMobile ? -80 : -180]), { stiffness: 60, damping: 20 });
-  const distantForestY = useSpring(useTransform(scrollYProgress, [0, 1], [0, isMobile ? -140 : -260]), { stiffness: 65, damping: 20 });
-  const lakeY = useSpring(useTransform(scrollYProgress, [0, 1], [0, isMobile ? -220 : -420]), { stiffness: 70, damping: 20 });
-  const foregroundY = useSpring(useTransform(scrollYProgress, [0, 1], [0, isMobile ? -300 : -600]), { stiffness: 75, damping: 20 });
-
-  const moonY = useSpring(useTransform(scrollYProgress, [0, 1], [0, -200]));
-  
-  if (!mounted) return null;
+  const particles = [
+    { left: "16%", top: "22%", size: 14, range: -180 },
+    { left: "29%", top: "54%", size: 10, range: 160 },
+    { left: "48%", top: "30%", size: 12, range: -140 },
+    { left: "72%", top: "48%", size: 16, range: 220 },
+    { left: "84%", top: "20%", size: 9, range: -120 },
+  ];
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-[-1] overflow-hidden">
-      {/* Background ambient orbs scattered down the page */}
-      {[...Array(6)].map((_, i) => (
-        <GlowingOrb key={`orb-${i}`} i={i} scrollYProgress={scrollYProgress} />
-      ))}
-
-      {/* Magical Moon / Giant Light Source */}
-      <motion.div 
-        className="absolute left-[30%] top-[5%] h-[500px] w-[500px] rounded-full bg-emerald-200/5 blur-[140px] will-change-transform" 
-        style={{ y: moonY }} 
+    <div className="pointer-events-none fixed inset-0 z-[1] overflow-hidden">
+      <motion.div className="site-parallax-grid" style={{ y: gridY }} />
+      <motion.div
+        className="absolute inset-x-0 top-[-8rem] h-[22rem] bg-[radial-gradient(circle,rgba(88,180,112,0.22),transparent_62%)] blur-[110px]"
+        style={{ y: canopyY }}
       />
+      <motion.div
+        className="site-parallax-orb left-[-8rem] top-[12%] h-72 w-72 bg-emerald-400/20"
+        style={{ y: orbOneY }}
+      />
+      <motion.div
+        className="site-parallax-orb right-[-10rem] top-[28%] h-96 w-96 bg-gold/14"
+        style={{ y: orbTwoY }}
+      />
+      <motion.div
+        className="site-parallax-orb left-[34%] top-[62%] h-80 w-80 bg-emerald-300/14"
+        style={{ y: orbThreeY }}
+      />
+      <motion.div className="site-parallax-band top-[18%] left-[-10%] w-[65vw]" style={{ y: bandY, rotate: -8 }} />
+      <motion.div className="site-parallax-band bottom-[14%] right-[-12%] w-[58vw]" style={{ y: bandMirrorY, rotate: 12 }} />
+      <motion.div className="site-forest-layer site-forest-back" style={{ y: forestBackY }} />
+      <motion.div className="site-lake-glow" style={{ y: lakeY }} />
+      <motion.div className="site-lake-ripple" style={{ y: lakeRippleY }} />
+      <motion.div className="site-parallax-foliage site-foliage-left left-[-5rem] bottom-[-8rem]" style={{ y: leftFoliageY }} />
+      <motion.div className="site-parallax-foliage site-foliage-right right-[-5rem] bottom-[-10rem]" style={{ y: rightFoliageY }} />
+      <motion.div className="site-forest-layer site-forest-front" style={{ y: forestFrontY }} />
+      {particles.map((particle, index) => {
+        const particleY = useTransform(scrollY, [0, 3000], [0, particle.range]);
 
-      {/* Parallax Layers */}
-      <motion.div className="absolute inset-x-0 bottom-[-5vh] h-[55vh] will-change-transform" style={{ y: mountainY }}>
-        <MountainSVG className="h-full w-full object-fill opacity-70" />
-      </motion.div>
-
-      <motion.div className="absolute inset-x-0 bottom-[-15vh] h-[45vh] will-change-transform" style={{ y: distantForestY }}>
-        <DistantForestSVG className="h-full w-full object-fill" />
-      </motion.div>
-
-      <motion.div className="absolute inset-x-0 bottom-[-30vh] h-[50vh] will-change-transform" style={{ y: lakeY }}>
-        <LakeSVG className="h-full w-full object-fill" />
-      </motion.div>
-
-      <motion.div className="absolute inset-x-0 bottom-[-60vh] h-[75vh] will-change-transform" style={{ y: foregroundY }}>
-        <ForegroundForestSVG className="h-full w-full object-fill" />
-      </motion.div>
-
-      {/* Heavy dispersion of fantasy fireflies tracking the entire page length */}
-      {[...Array(35)].map((_, i) => (
-        <Firefly key={`firefly-${i}`} i={i} scrollYProgress={scrollYProgress} />
-      ))}
+        return (
+          <motion.div
+            key={index}
+            className="site-parallax-particle"
+            style={{
+              left: particle.left,
+              top: particle.top,
+              width: particle.size,
+              height: particle.size,
+              y: particleY,
+            }}
+          />
+        );
+      })}
     </div>
   );
 }
 
 export function ParallaxBackground() {
   const reduceMotion = useReducedMotion();
+  const isMobile = useIsMobile();
 
   if (reduceMotion) {
     return null;
   }
 
-  return <ScenicParallaxBackground />;
+  return isMobile ? <MobileParallaxBackground /> : <DesktopParallaxBackground />;
 }
