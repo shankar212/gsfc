@@ -4,6 +4,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 
 import { ThemeProvider } from "@/components/theme-provider";
+import { ScrollToTop } from "@/components/scroll-to-top";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -32,6 +33,7 @@ export default function RootLayout({
       <body className={`${poppins.variable} bg-mist dark:bg-background font-sans text-black dark:text-white antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           {children}
+          <ScrollToTop />
         </ThemeProvider>
       </body>
     </html>
