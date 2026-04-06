@@ -3,16 +3,21 @@
 import { motion, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
 import { useEffect } from "react";
 
+import { useIsMobile } from "@/hooks/use-is-mobile";
+
 export function CursorAura() {
   const reduceMotion = useReducedMotion();
+  const isMobile = useIsMobile();
   const x = useMotionValue(-200);
   const y = useMotionValue(-200);
 
   const smoothX = useSpring(x, { damping: 30, stiffness: 140, mass: 0.3 });
   const smoothY = useSpring(y, { damping: 30, stiffness: 140, mass: 0.3 });
 
+  const disabled = reduceMotion || isMobile;
+
   useEffect(() => {
-    if (reduceMotion) {
+    if (disabled) {
       return;
     }
 
@@ -25,7 +30,7 @@ export function CursorAura() {
     return () => window.removeEventListener("mousemove", handleMove);
   }, [reduceMotion, x, y]);
 
-  if (reduceMotion) {
+  if (disabled) {
     return null;
   }
 

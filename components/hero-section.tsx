@@ -2,8 +2,7 @@
 
 import { motion, useMotionTemplate, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
 import { ChevronDown, Sparkles } from "lucide-react";
-import { useEffect } from "react";
-
+import { useEffect, useRef } from "react";
 import { FantasyGarden } from "@/components/fantasy-garden";
 import { FloatingLeaves } from "@/components/floating-leaves";
 import { NatureBackdrop } from "@/components/nature-backdrop";
@@ -14,9 +13,13 @@ import { contactInfo } from "@/lib/content";
 export function HeroSection() {
   const reduceMotion = useReducedMotion();
   const isMobile = useIsMobile();
+  const targetRef = useRef<HTMLElement>(null);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  const { scrollYProgress } = useScroll();
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ["start start", "end start"],
+  });
   const disableHeavyMotion = reduceMotion || isMobile;
 
   const videoRawY = useTransform(scrollYProgress, [0, 1], [0, isMobile ? 0 : 160]);
@@ -53,7 +56,7 @@ export function HeroSection() {
   }, [disableHeavyMotion, mouseX, mouseY]);
 
   return (
-    <section id="home" className="snap-section relative min-h-screen overflow-hidden">
+    <section ref={targetRef} id="home" className="snap-section relative min-h-screen overflow-hidden">
       <motion.div className="absolute inset-0" style={{ y: videoY }}>
         <video
           className="absolute inset-0 h-full w-full scale-110 object-cover"
