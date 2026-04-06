@@ -7,15 +7,10 @@ import { useIsMobile } from "@/hooks/use-is-mobile";
 function MobileParallaxBackground() {
   return (
     <div className="pointer-events-none fixed inset-0 z-[1] overflow-hidden">
-      <div className="absolute inset-x-0 top-[-6rem] h-[16rem] bg-[radial-gradient(circle,rgba(88,180,112,0.18),transparent_62%)] blur-[72px] animate-parallax-drift-slow" />
-      <div className="site-parallax-orb left-[-4rem] top-[18%] h-44 w-44 bg-emerald-400/16 opacity-30 animate-parallax-float" />
-      <div className="site-parallax-orb right-[-4rem] top-[42%] h-36 w-36 bg-gold/10 opacity-20 animate-parallax-float-delayed" />
-      <div className="site-forest-layer site-forest-back animate-parallax-rise" />
-      <div className="site-lake-glow animate-lake-glimmer" />
-      <div className="site-lake-ripple animate-lake-ripple" />
-      <div className="site-parallax-foliage site-foliage-left left-[-4rem] bottom-[-3rem] animate-forest-sway-left" />
-      <div className="site-parallax-foliage site-foliage-right right-[-4rem] bottom-[-4rem] animate-forest-sway-right" />
-      <div className="site-forest-layer site-forest-front animate-parallax-rise-delayed" />
+      {/* Simplified static background for mobile to save CPU and remove scroll jitter */}
+      <div className="absolute inset-x-0 top-[-6rem] h-[16rem] bg-[radial-gradient(circle,rgba(88,180,112,0.18),transparent_62%)] opacity-60" />
+      <div className="site-forest-layer site-forest-back opacity-50" />
+      <div className="site-lake-glow opacity-30" />
     </div>
   );
 }
