@@ -116,12 +116,12 @@ export function ShootEventsSection() {
                   className="relative overflow-hidden rounded-[26px] border border-black/10 dark:border-white/10 bg-white/60 dark:bg-black/25"
                 >
                   <div className="absolute inset-x-3 bottom-3 z-10 flex flex-col gap-3 sm:inset-x-auto sm:bottom-4 sm:right-4 sm:max-w-[calc(100%-2rem)]">
-                    <div className="inline-flex w-fit rounded-full border border-black/10 dark:border-white/15 bg-white/60 dark:bg-black/35 p-1 backdrop-blur-xl">
+                    <div className="inline-flex w-fit rounded-full border border-white/20 bg-black/60 p-1">
                       <button
                         type="button"
                         onClick={() => setViewMode("landscape")}
                         className={`rounded-full px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.18em] transition sm:px-4 ${
-                          viewMode === "landscape" ? "bg-gold text-black" : "text-black/72 dark:text-white/72"
+                          viewMode === "landscape" ? "bg-gold text-black" : "text-white/80"
                         }`}
                       >
                         Landscape
@@ -130,7 +130,7 @@ export function ShootEventsSection() {
                         type="button"
                         onClick={() => setViewMode("vertical")}
                         className={`rounded-full px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.18em] transition sm:px-4 ${
-                          viewMode === "vertical" ? "bg-gold text-black" : "text-black/72 dark:text-white/72"
+                          viewMode === "vertical" ? "bg-gold text-black" : "text-white/80"
                         }`}
                       >
                         Vertical
@@ -138,7 +138,7 @@ export function ShootEventsSection() {
                     </div>
                     <button
                       type="button"
-                      className="inline-flex w-fit items-center gap-2 rounded-full border border-black/10 dark:border-white/15 bg-white/60 dark:bg-black/35 px-3 py-2 text-xs text-black dark:text-white backdrop-blur-xl transition hover:bg-black/45 sm:px-4"
+                      className="inline-flex w-fit items-center gap-2 rounded-full border border-white/20 bg-black/60 px-3 py-2 text-xs text-white transition hover:bg-black/80 sm:px-4"
                       onClick={() => setIsMuted((value) => !value)}
                       aria-label={isMuted ? "Unmute video audio" : "Mute video audio"}
                     >
@@ -172,15 +172,17 @@ export function ShootEventsSection() {
                     <Expand size={14} />
                     Full View
                   </button>
-                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-5 pb-28 sm:pb-5">
-                    <div className="inline-flex items-center gap-2 rounded-full border border-black/10 dark:border-white/15 bg-white/60 dark:bg-black/25 px-3 py-2 text-xs uppercase tracking-[0.24em] text-gold backdrop-blur-xl">
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black pb-28 sm:pb-5">
+                    <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-black/60 px-3 py-2 text-xs uppercase tracking-[0.24em] text-gold shadow-sm">
                       <PlayCircle size={14} />
                       Playable Video
                     </div>
-                    <p className="mt-3 text-xl font-semibold text-black dark:text-white">{currentVideo.title}</p>
-                    <p className="mt-2 text-sm text-black/70 dark:text-white/70">
-                      Video plays when visible on screen and pauses when scrolled away. Use sound and vertical controls here.
-                    </p>
+                    <div className="px-5">
+                      <p className="mt-3 text-xl font-semibold text-white">{currentVideo.title}</p>
+                      <p className="mt-2 text-sm text-white/70">
+                        Video plays when visible on screen and pauses when scrolled away. Use sound and vertical controls here.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </motion.div>
