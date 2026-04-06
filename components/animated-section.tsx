@@ -26,11 +26,11 @@ function DesktopAnimatedSection({ id, className, children, reduceMotion }: Anima
   const contentOpacity = useTransform(scrollYProgress, [0, 0.06, 1], [0.84, 1, 1]);
   const contentScale = useTransform(scrollYProgress, [0, 0.2, 1], [0.995, 1, 1]);
 
-  const orbOneY = useSpring(orbOneRaw, { stiffness: 90, damping: 24, mass: 0.45 });
-  const orbTwoY = useSpring(orbTwoRaw, { stiffness: 90, damping: 24, mass: 0.45 });
-  const gridY = useSpring(gridRaw, { stiffness: 90, damping: 24, mass: 0.45 });
-  const streakX = useSpring(streakRaw, { stiffness: 90, damping: 24, mass: 0.45 });
-  const contentY = useSpring(contentRawY, { stiffness: 110, damping: 26, mass: 0.42 });
+  const orbOneY = orbOneRaw;
+  const orbTwoY = orbTwoRaw;
+  const gridY = gridRaw;
+  const streakX = streakRaw;
+  const contentY = contentRawY;
 
   return (
     <motion.section

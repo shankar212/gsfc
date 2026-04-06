@@ -21,17 +21,17 @@ function MobileParallaxBackground() {
 function DesktopParallaxBackground() {
   const { scrollY } = useScroll();
 
-  const orbOneY = useSpring(useTransform(scrollY, [0, 3000], [0, -320]), { stiffness: 72, damping: 26, mass: 0.55 });
-  const orbTwoY = useSpring(useTransform(scrollY, [0, 3000], [0, 240]), { stiffness: 72, damping: 26, mass: 0.55 });
-  const orbThreeY = useSpring(useTransform(scrollY, [0, 3000], [0, -200]), { stiffness: 72, damping: 26, mass: 0.55 });
-  const bandY = useSpring(useTransform(scrollY, [0, 3000], [0, -170]), { stiffness: 68, damping: 24, mass: 0.6 });
-  const gridY = useSpring(useTransform(scrollY, [0, 3000], [0, -120]), { stiffness: 68, damping: 24, mass: 0.6 });
-  const leftFoliageY = useSpring(useTransform(scrollY, [0, 3000], [0, -260]), { stiffness: 64, damping: 24, mass: 0.62 });
-  const rightFoliageY = useSpring(useTransform(scrollY, [0, 3000], [0, 180]), { stiffness: 64, damping: 24, mass: 0.62 });
-  const canopyY = useSpring(useTransform(scrollY, [0, 3000], [0, -140]), { stiffness: 68, damping: 24, mass: 0.6 });
-  const lakeY = useSpring(useTransform(scrollY, [0, 3000], [0, 120]), { stiffness: 70, damping: 24, mass: 0.58 });
-  const forestBackY = useSpring(useTransform(scrollY, [0, 3000], [0, -70]), { stiffness: 66, damping: 24, mass: 0.6 });
-  const forestFrontY = useSpring(useTransform(scrollY, [0, 3000], [0, 95]), { stiffness: 66, damping: 24, mass: 0.6 });
+  const orbOneY = useTransform(scrollY, [0, 3000], [0, -320]);
+  const orbTwoY = useTransform(scrollY, [0, 3000], [0, 240]);
+  const orbThreeY = useTransform(scrollY, [0, 3000], [0, -200]);
+  const bandY = useTransform(scrollY, [0, 3000], [0, -170]);
+  const gridY = useTransform(scrollY, [0, 3000], [0, -120]);
+  const leftFoliageY = useTransform(scrollY, [0, 3000], [0, -260]);
+  const rightFoliageY = useTransform(scrollY, [0, 3000], [0, 180]);
+  const canopyY = useTransform(scrollY, [0, 3000], [0, -140]);
+  const lakeY = useTransform(scrollY, [0, 3000], [0, 120]);
+  const forestBackY = useTransform(scrollY, [0, 3000], [0, -70]);
+  const forestFrontY = useTransform(scrollY, [0, 3000], [0, 95]);
   const bandMirrorY = useTransform(bandY, (value) => value * -0.7);
   const lakeRippleY = useTransform(lakeY, (value) => value * 0.65);
 
