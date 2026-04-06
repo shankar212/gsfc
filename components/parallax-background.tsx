@@ -1,21 +1,21 @@
 "use client";
 
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
 
 import { useIsMobile } from "@/hooks/use-is-mobile";
 
 function MobileParallaxBackground() {
   return (
     <div className="pointer-events-none fixed inset-0 z-[1] overflow-hidden">
-      <div className="absolute inset-x-0 top-[-6rem] h-[16rem] bg-[radial-gradient(circle,rgba(88,180,112,0.18),transparent_62%)] blur-[72px]" />
-      <div className="site-parallax-orb left-[-4rem] top-[18%] h-44 w-44 bg-emerald-400/16 opacity-30" />
-      <div className="site-parallax-orb right-[-4rem] top-[42%] h-36 w-36 bg-gold/10 opacity-20" />
-      <div className="site-forest-layer site-forest-back" />
-      <div className="site-lake-glow" />
-      <div className="site-lake-ripple" />
-      <div className="site-parallax-foliage site-foliage-left left-[-4rem] bottom-[-3rem]" />
-      <div className="site-parallax-foliage site-foliage-right right-[-4rem] bottom-[-4rem]" />
-      <div className="site-forest-layer site-forest-front" />
+      <div className="absolute inset-x-0 top-[-6rem] h-[16rem] bg-[radial-gradient(circle,rgba(88,180,112,0.18),transparent_62%)] blur-[72px] animate-parallax-drift-slow" />
+      <div className="site-parallax-orb left-[-4rem] top-[18%] h-44 w-44 bg-emerald-400/16 opacity-30 animate-parallax-float" />
+      <div className="site-parallax-orb right-[-4rem] top-[42%] h-36 w-36 bg-gold/10 opacity-20 animate-parallax-float-delayed" />
+      <div className="site-forest-layer site-forest-back animate-parallax-rise" />
+      <div className="site-lake-glow animate-lake-glimmer" />
+      <div className="site-lake-ripple animate-lake-ripple" />
+      <div className="site-parallax-foliage site-foliage-left left-[-4rem] bottom-[-3rem] animate-forest-sway-left" />
+      <div className="site-parallax-foliage site-foliage-right right-[-4rem] bottom-[-4rem] animate-forest-sway-right" />
+      <div className="site-forest-layer site-forest-front animate-parallax-rise-delayed" />
     </div>
   );
 }
@@ -23,17 +23,17 @@ function MobileParallaxBackground() {
 function DesktopParallaxBackground() {
   const { scrollY } = useScroll();
 
-  const orbOneY = useTransform(scrollY, [0, 3000], [0, -320]);
-  const orbTwoY = useTransform(scrollY, [0, 3000], [0, 240]);
-  const orbThreeY = useTransform(scrollY, [0, 3000], [0, -200]);
-  const bandY = useTransform(scrollY, [0, 3000], [0, -170]);
-  const gridY = useTransform(scrollY, [0, 3000], [0, -120]);
-  const leftFoliageY = useTransform(scrollY, [0, 3000], [0, -260]);
-  const rightFoliageY = useTransform(scrollY, [0, 3000], [0, 180]);
-  const canopyY = useTransform(scrollY, [0, 3000], [0, -140]);
-  const lakeY = useTransform(scrollY, [0, 3000], [0, 120]);
-  const forestBackY = useTransform(scrollY, [0, 3000], [0, -70]);
-  const forestFrontY = useTransform(scrollY, [0, 3000], [0, 95]);
+  const orbOneY = useSpring(useTransform(scrollY, [0, 3000], [0, -320]), { stiffness: 72, damping: 26, mass: 0.55 });
+  const orbTwoY = useSpring(useTransform(scrollY, [0, 3000], [0, 240]), { stiffness: 72, damping: 26, mass: 0.55 });
+  const orbThreeY = useSpring(useTransform(scrollY, [0, 3000], [0, -200]), { stiffness: 72, damping: 26, mass: 0.55 });
+  const bandY = useSpring(useTransform(scrollY, [0, 3000], [0, -170]), { stiffness: 68, damping: 24, mass: 0.6 });
+  const gridY = useSpring(useTransform(scrollY, [0, 3000], [0, -120]), { stiffness: 68, damping: 24, mass: 0.6 });
+  const leftFoliageY = useSpring(useTransform(scrollY, [0, 3000], [0, -260]), { stiffness: 64, damping: 24, mass: 0.62 });
+  const rightFoliageY = useSpring(useTransform(scrollY, [0, 3000], [0, 180]), { stiffness: 64, damping: 24, mass: 0.62 });
+  const canopyY = useSpring(useTransform(scrollY, [0, 3000], [0, -140]), { stiffness: 68, damping: 24, mass: 0.6 });
+  const lakeY = useSpring(useTransform(scrollY, [0, 3000], [0, 120]), { stiffness: 70, damping: 24, mass: 0.58 });
+  const forestBackY = useSpring(useTransform(scrollY, [0, 3000], [0, -70]), { stiffness: 66, damping: 24, mass: 0.6 });
+  const forestFrontY = useSpring(useTransform(scrollY, [0, 3000], [0, 95]), { stiffness: 66, damping: 24, mass: 0.6 });
   const bandMirrorY = useTransform(bandY, (value) => value * -0.7);
   const lakeRippleY = useTransform(lakeY, (value) => value * 0.65);
 
