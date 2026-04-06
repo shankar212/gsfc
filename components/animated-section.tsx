@@ -3,6 +3,8 @@
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
 import { ReactNode, useRef } from "react";
 
+import { useIsMobile } from "@/hooks/use-is-mobile";
+
 type AnimatedSectionProps = {
   id?: string;
   className?: string;
@@ -11,17 +13,19 @@ type AnimatedSectionProps = {
 
 export function AnimatedSection({ id, className, children }: AnimatedSectionProps) {
   const reduceMotion = useReducedMotion();
+  const isMobile = useIsMobile();
   const ref = useRef<HTMLElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
 
-  const orbOneRaw = useTransform(scrollYProgress, [0, 1], [reduceMotion ? 0 : 40, reduceMotion ? 0 : -32]);
-  const orbTwoRaw = useTransform(scrollYProgress, [0, 1], [reduceMotion ? 0 : -18, reduceMotion ? 0 : 52]);
-  const gridRaw = useTransform(scrollYProgress, [0, 1], [0, reduceMotion ? 0 : -22]);
-  const streakRaw = useTransform(scrollYProgress, [0, 1], [reduceMotion ? 0 : -14, reduceMotion ? 0 : 30]);
-  const contentRawY = useTransform(scrollYProgress, [0, 0.25, 1], [reduceMotion ? 0 : 18, 0, reduceMotion ? 0 : -8]);
+  const disableScrollEffects = reduceMotion || isMobile;
+  const orbOneRaw = useTransform(scrollYProgress, [0, 1], [disableScrollEffects ? 0 : 40, disableScrollEffects ? 0 : -32]);
+  const orbTwoRaw = useTransform(scrollYProgress, [0, 1], [disableScrollEffects ? 0 : -18, disableScrollEffects ? 0 : 52]);
+  const gridRaw = useTransform(scrollYProgress, [0, 1], [0, disableScrollEffects ? 0 : -22]);
+  const streakRaw = useTransform(scrollYProgress, [0, 1], [disableScrollEffects ? 0 : -14, disableScrollEffects ? 0 : 30]);
+  const contentRawY = useTransform(scrollYProgress, [0, 0.25, 1], [disableScrollEffects ? 0 : 18, 0, disableScrollEffects ? 0 : -8]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.06, 1], [0.84, 1, 1]);
   const contentScale = useTransform(scrollYProgress, [0, 0.2, 1], [0.995, 1, 1]);
 
@@ -39,22 +43,22 @@ export function AnimatedSection({ id, className, children }: AnimatedSectionProp
       initial={{ opacity: 0.88, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.05 }}
-      transition={{ duration: 0.42, ease: "easeOut" }}
+      transition={{ duration: isMobile ? 0.26 : 0.42, ease: "easeOut" }}
     >
-      {!reduceMotion && <motion.div className="parallax-grid" style={{ y: gridY }} />}
-      {!reduceMotion && (
+      {!disableScrollEffects && <motion.div className="parallax-grid" style={{ y: gridY }} />}
+      {!disableScrollEffects && (
         <motion.div
           className="parallax-orb left-[-4rem] top-[18%] h-44 w-44 bg-emerald-400/10"
           style={{ y: orbOneY }}
         />
       )}
-      {!reduceMotion && (
+      {!disableScrollEffects && (
         <motion.div
           className="parallax-orb right-[-3rem] top-[56%] h-36 w-36 bg-gold/10"
           style={{ y: orbTwoY }}
         />
       )}
-      {!reduceMotion && <motion.div className="parallax-streak left-[8%] top-[24%] w-44" style={{ x: streakX }} />}
+      {!disableScrollEffects && <motion.div className="parallax-streak left-[8%] top-[24%] w-44" style={{ x: streakX }} />}
       <motion.div style={{ y: contentY, opacity: contentOpacity, scale: contentScale }}>
         {children}
       </motion.div>

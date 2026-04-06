@@ -8,35 +8,38 @@ import { FantasyGarden } from "@/components/fantasy-garden";
 import { FloatingLeaves } from "@/components/floating-leaves";
 import { NatureBackdrop } from "@/components/nature-backdrop";
 import { TreeBranch } from "@/components/tree-branch";
+import { useIsMobile } from "@/hooks/use-is-mobile";
 import { contactInfo } from "@/lib/content";
 
 export function HeroSection() {
   const reduceMotion = useReducedMotion();
+  const isMobile = useIsMobile();
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const { scrollYProgress } = useScroll();
+  const disableHeavyMotion = reduceMotion || isMobile;
 
-  const videoRawY = useTransform(scrollYProgress, [0, 1], [0, 160]);
-  const contentRawY = useTransform(scrollYProgress, [0, 1], [0, -44]);
-  const sideRawY = useTransform(scrollYProgress, [0, 1], [0, -72]);
+  const videoRawY = useTransform(scrollYProgress, [0, 1], [0, isMobile ? 0 : 160]);
+  const contentRawY = useTransform(scrollYProgress, [0, 1], [0, isMobile ? 0 : -44]);
+  const sideRawY = useTransform(scrollYProgress, [0, 1], [0, isMobile ? 0 : -72]);
 
-  const haloX = useTransform(mouseX, [-0.5, 0.5], [-30, 30]);
-  const haloY = useTransform(mouseY, [-0.5, 0.5], [-20, 20]);
-  const panelX = useTransform(mouseX, [-0.5, 0.5], [-16, 16]);
-  const panelY = useTransform(mouseY, [-0.5, 0.5], [-12, 12]);
+  const haloX = useTransform(mouseX, [-0.5, 0.5], [disableHeavyMotion ? 0 : -30, disableHeavyMotion ? 0 : 30]);
+  const haloY = useTransform(mouseY, [-0.5, 0.5], [disableHeavyMotion ? 0 : -20, disableHeavyMotion ? 0 : 20]);
+  const panelX = useTransform(mouseX, [-0.5, 0.5], [disableHeavyMotion ? 0 : -16, disableHeavyMotion ? 0 : 16]);
+  const panelY = useTransform(mouseY, [-0.5, 0.5], [disableHeavyMotion ? 0 : -12, disableHeavyMotion ? 0 : 12]);
   const secondaryHaloX = useTransform(haloX, (value) => value * -0.7);
   const secondaryHaloY = useTransform(haloY, (value) => value * -0.6);
   const videoY = useSpring(videoRawY, { stiffness: 82, damping: 24, mass: 0.6 });
   const contentY = useSpring(contentRawY, { stiffness: 88, damping: 24, mass: 0.56 });
   const sideY = useSpring(sideRawY, { stiffness: 88, damping: 24, mass: 0.56 });
   const panelOffsetY = useTransform(() => panelY.get() + sideY.get());
-  const mistY = useSpring(useTransform(scrollYProgress, [0, 1], [0, -110]), { stiffness: 78, damping: 22, mass: 0.6 });
-  const branchY = useSpring(useTransform(scrollYProgress, [0, 1], [0, -56]), { stiffness: 82, damping: 24, mass: 0.58 });
+  const mistY = useSpring(useTransform(scrollYProgress, [0, 1], [0, isMobile ? 0 : -110]), { stiffness: 78, damping: 22, mass: 0.6 });
+  const branchY = useSpring(useTransform(scrollYProgress, [0, 1], [0, isMobile ? 0 : -56]), { stiffness: 82, damping: 24, mass: 0.58 });
 
   const radialGlow = useMotionTemplate`radial-gradient(circle at ${useTransform(mouseX, [-0.5, 0.5], [35, 65])}% ${useTransform(mouseY, [-0.5, 0.5], [30, 60])}%, rgba(75, 255, 145, 0.18), transparent 32%)`;
 
   useEffect(() => {
-    if (reduceMotion) {
+    if (disableHeavyMotion) {
       return;
     }
 
@@ -47,7 +50,7 @@ export function HeroSection() {
 
     window.addEventListener("mousemove", handleMove);
     return () => window.removeEventListener("mousemove", handleMove);
-  }, [reduceMotion, mouseX, mouseY]);
+  }, [disableHeavyMotion, mouseX, mouseY]);
 
   return (
     <section id="home" className="snap-section relative min-h-screen overflow-hidden">
@@ -66,8 +69,8 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-hero-overlay" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(212,175,104,0.16),transparent_26%)]" />
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(2,8,5,0.15),rgba(2,8,5,0.66))]" />
-      {!reduceMotion && <motion.div className="absolute inset-0 opacity-90" style={{ backgroundImage: radialGlow }} />}
-      {!reduceMotion && (
+      {!disableHeavyMotion && <motion.div className="absolute inset-0 opacity-90" style={{ backgroundImage: radialGlow }} />}
+      {!disableHeavyMotion && (
         <>
           <motion.div
             className="absolute left-[10%] top-[14%] h-48 w-48 rounded-full bg-emerald-300/18 blur-[100px]"
@@ -85,7 +88,7 @@ export function HeroSection() {
       )}
       <div className="ambient-line hidden sm:block left-[8%] top-[18%] w-[18rem]" />
       <div className="ambient-line hidden sm:block right-[8%] top-[72%] w-[22rem]" />
-      {!reduceMotion && (
+      {!disableHeavyMotion && (
         <>
           <motion.div style={{ y: branchY }} className="absolute inset-0 opacity-75 sm:opacity-100">
             <TreeBranch className="top-[4%] sm:top-[2%]" />

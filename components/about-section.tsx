@@ -7,6 +7,7 @@ import { useRef } from "react";
 
 import { AnimatedSection } from "@/components/animated-section";
 import { SectionHeading } from "@/components/section-heading";
+import { useIsMobile } from "@/hooks/use-is-mobile";
 
 const highlights = [
   {
@@ -27,14 +28,15 @@ const highlights = [
 ];
 
 export function AboutSection() {
+  const isMobile = useIsMobile();
   const ref = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
 
-  const collageY = useTransform(scrollYProgress, [0, 1], [50, -35]);
-  const sidebarY = useTransform(scrollYProgress, [0, 1], [20, -20]);
+  const collageY = useTransform(scrollYProgress, [0, 1], [isMobile ? 0 : 50, isMobile ? 0 : -35]);
+  const sidebarY = useTransform(scrollYProgress, [0, 1], [isMobile ? 0 : 20, isMobile ? 0 : -20]);
 
   return (
     <AnimatedSection id="about" className="relative py-24 sm:py-28">

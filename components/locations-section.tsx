@@ -7,16 +7,18 @@ import { useRef } from "react";
 
 import { AnimatedSection } from "@/components/animated-section";
 import { SectionHeading } from "@/components/section-heading";
+import { useIsMobile } from "@/hooks/use-is-mobile";
 import { locationCards } from "@/lib/content";
 
 export function LocationsSection() {
+  const isMobile = useIsMobile();
   const ref = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
 
-  const cardsY = useTransform(scrollYProgress, [0, 1], [45, -30]);
+  const cardsY = useTransform(scrollYProgress, [0, 1], [isMobile ? 0 : 45, isMobile ? 0 : -30]);
 
   return (
     <AnimatedSection id="locations" className="py-24 sm:py-28">
