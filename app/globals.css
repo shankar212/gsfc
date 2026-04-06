@@ -14,6 +14,7 @@ html {
   scroll-behavior: smooth;
   scroll-snap-type: y proximity;
   scroll-padding-top: 96px;
+  overflow-x: hidden;
 }
 
 body {
@@ -333,8 +334,6 @@ a {
 
   .site-parallax-grid,
   .site-parallax-band,
-  .site-parallax-foliage,
-  .site-parallax-particle,
   .parallax-grid,
   .parallax-streak {
     display: none;
@@ -342,12 +341,65 @@ a {
 
   .site-parallax-orb {
     filter: blur(52px);
-    opacity: 0.45;
+    opacity: 0.52;
   }
 
   .parallax-orb {
     filter: blur(32px);
-    opacity: 0.18;
+    opacity: 0.22;
+  }
+
+  .site-parallax-foliage {
+    width: 16rem;
+    height: 28rem;
+    opacity: 0.3;
+  }
+
+  .site-parallax-particle {
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
+}
+
+@media (max-width: 640px) {
+  .section-shell {
+    @apply px-4;
+  }
+
+  .section-tag {
+    @apply px-3 py-1.5 text-[10px] tracking-[0.24em];
+  }
+
+  .glow-button,
+  .ghost-button {
+    @apply w-full px-5 py-3.5 text-sm;
+  }
+
+  .hero-card,
+  .glass-panel,
+  .soft-card {
+    border-radius: 24px;
+  }
+
+  .site-parallax-orb {
+    filter: blur(42px);
+    opacity: 0.42;
+  }
+
+  .site-parallax-foliage {
+    width: 12rem;
+    height: 22rem;
+    opacity: 0.22;
+  }
+
+  .site-parallax-particle {
+    opacity: 0.32;
+    transform: scale(0.68);
+  }
+
+  .leaf-glow {
+    opacity: 0.3;
+    filter: blur(22px);
   }
 }
 

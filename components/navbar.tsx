@@ -24,14 +24,14 @@ export function Navbar() {
         scrolled ? "bg-black/70 py-3 shadow-glass backdrop-blur-2xl" : "bg-transparent py-4 sm:py-5"
       }`}
     >
-      <nav className="section-shell flex items-center justify-between">
+      <nav className="section-shell flex items-center justify-between gap-3">
         <a href="#home" className="flex min-w-0 items-center gap-2.5 sm:gap-3">
           <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[20px] border border-gold/35 bg-[linear-gradient(135deg,rgba(39,51,38,0.96),rgba(22,29,22,0.96))] text-[0.95rem] font-bold tracking-[0.32em] text-gold shadow-[0_10px_30px_rgba(0,0,0,0.22)] sm:h-12 sm:w-12 sm:rounded-[22px] sm:text-[1rem]">
             <span className="translate-x-[0.12rem]">GS</span>
           </div>
           <div className="min-w-0">
             <p className="hidden text-sm font-semibold uppercase tracking-[0.3em] text-gold sm:block">Film City</p>
-            <p className="truncate text-sm font-semibold text-white sm:text-base">Gulab Singh</p>
+            <p className="truncate pr-1 text-sm font-semibold text-white sm:text-base">Gulab Singh</p>
           </div>
         </a>
 
@@ -52,7 +52,7 @@ export function Navbar() {
 
         <button
           type="button"
-          className="inline-flex rounded-full border border-white/15 bg-white/10 p-2.5 text-white lg:hidden"
+          className="inline-flex shrink-0 rounded-full border border-white/15 bg-white/10 p-2.5 text-white lg:hidden"
           onClick={() => setOpen((value) => !value)}
           aria-label="Toggle menu"
         >

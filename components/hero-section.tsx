@@ -80,23 +80,30 @@ export function HeroSection() {
           />
         </>
       )}
-      <div className="ambient-line left-[8%] top-[18%] w-[18rem]" />
-      <div className="ambient-line right-[8%] top-[72%] w-[22rem]" />
+      <div className="ambient-line hidden sm:block left-[8%] top-[18%] w-[18rem]" />
+      <div className="ambient-line hidden sm:block right-[8%] top-[72%] w-[22rem]" />
       {!reduceMotion && (
         <>
-          <motion.div style={{ y: branchY }} className="absolute inset-0">
-            <TreeBranch className="top-[2%]" />
+          <motion.div style={{ y: branchY }} className="absolute inset-0 opacity-75 sm:opacity-100">
+            <TreeBranch className="top-[4%] sm:top-[2%]" />
           </motion.div>
-          <div className="hidden md:block">
+          <div className="absolute inset-0 opacity-75 sm:opacity-100">
             <NatureBackdrop variant="hero" />
+          </div>
+          <div className="absolute inset-0 opacity-65 sm:opacity-100">
             <FantasyGarden mode="hero" />
+          </div>
+          <div className="absolute inset-0 opacity-70 sm:opacity-100">
             <FloatingLeaves />
           </div>
         </>
       )}
 
-      <motion.div className="section-shell relative z-[4] flex min-h-screen items-center py-24 sm:py-28" style={{ y: contentY }}>
-        <div className="max-w-4xl">
+      <motion.div
+        className="section-shell relative z-[4] flex min-h-screen items-center py-24 sm:py-28"
+        style={{ y: contentY }}
+      >
+        <div className="w-full max-w-4xl">
           <motion.span
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -109,7 +116,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="mt-5 max-w-4xl text-4xl font-semibold leading-[1.02] text-white sm:mt-6 sm:text-6xl lg:text-8xl"
+            className="mt-5 max-w-4xl text-[2.9rem] font-semibold leading-[0.98] text-white sm:mt-6 sm:text-6xl lg:text-8xl"
           >
             Gulab Singh Film City
           </motion.h1>
@@ -117,10 +124,12 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.16 }}
-            className="mt-4 inline-flex max-w-full items-center gap-3 rounded-full border border-emerald-200/15 bg-emerald-300/10 px-4 py-2 text-xs text-emerald-50/90 backdrop-blur-xl sm:mt-5 sm:text-sm"
+            className="mt-4 inline-flex max-w-full flex-wrap items-center gap-2.5 rounded-[22px] border border-emerald-200/15 bg-emerald-300/10 px-4 py-2 text-xs text-emerald-50/90 backdrop-blur-xl sm:mt-5 sm:rounded-full sm:gap-3 sm:text-sm"
           >
             <Sparkles size={16} className="text-gold" />
-            <span className="truncate sm:whitespace-normal">Fantasy greenery, cinematic waterlines, and living outdoor frames</span>
+            <span className="max-w-full text-left sm:whitespace-normal">
+              Fantasy greenery, cinematic waterlines, and living outdoor frames
+            </span>
           </motion.div>
           <motion.p
             initial={{ opacity: 0, y: 24 }}
@@ -136,7 +145,7 @@ export function HeroSection() {
             transition={{ duration: 0.9, delay: 0.24 }}
             className="mt-5 max-w-xl rounded-[22px] border border-emerald-200/10 bg-emerald-950/18 px-4 py-4 backdrop-blur-xl sm:mt-6 sm:rounded-[26px] sm:px-5"
           >
-            <p className="text-sm leading-7 text-white/68">
+            <p className="text-sm leading-6 text-white/68 sm:leading-7">
               Enter a magical world of scenic park views, fantasy greenery, reflective water edges, and premium open-air spaces crafted for shoots, celebrations, and unforgettable moments.
             </p>
           </motion.div>
@@ -158,7 +167,7 @@ export function HeroSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.6 }}
-            className="mt-10 grid max-w-3xl gap-3 sm:mt-14 sm:gap-4 sm:grid-cols-3"
+            className="mt-10 grid max-w-3xl gap-3 sm:mt-14 sm:gap-4 sm:grid-cols-2 xl:grid-cols-3"
           >
             {[
               ["Film Shoots", "Outdoor cinematic locations"],

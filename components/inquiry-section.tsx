@@ -21,14 +21,16 @@ export function InquirySection() {
   return (
     <AnimatedSection id="inquiry" className="py-24 sm:py-28">
       <div className="section-shell">
-        <div className="grid gap-10 overflow-hidden rounded-[36px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.1),rgba(19,59,43,0.32))] p-6 shadow-glow lg:grid-cols-[0.9fr_1.1fr] lg:p-10">
-          <SectionHeading
-            tag="Inquiry"
-            title="Plan your next shoot or event at Gulab Singh Film City."
-            description="Share your event type, preferred use, and contact details. This form shows a success alert on submit so the front-end experience is complete without backend wiring."
-          />
+        <div className="grid gap-8 overflow-hidden rounded-[30px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.1),rgba(19,59,43,0.32))] p-4 shadow-glow sm:gap-10 sm:rounded-[36px] sm:p-6 lg:grid-cols-[0.9fr_1.1fr] lg:p-10">
+          <div className="min-w-0">
+            <SectionHeading
+              tag="Inquiry"
+              title="Plan your next shoot or event at Gulab Singh Film City."
+              description="Share your event type, preferred use, and contact details. This form shows a success alert on submit so the front-end experience is complete without backend wiring."
+            />
+          </div>
 
-          <div className="glass-panel rounded-[30px] p-6 sm:p-8">
+          <div className="glass-panel min-w-0 rounded-[24px] p-4 sm:rounded-[30px] sm:p-6 lg:p-8">
             {submitted && (
               <div className="mb-6 rounded-2xl border border-emerald-400/30 bg-emerald-400/10 px-4 py-3 text-sm text-emerald-100">
                 Inquiry submitted successfully. We&apos;ll be in touch soon.
@@ -68,7 +70,7 @@ export function InquirySection() {
               />
               <button
                 type="submit"
-                className="mt-2 rounded-full bg-gold px-6 py-4 text-sm font-semibold text-black transition hover:scale-[1.01]"
+                className="mt-2 w-full rounded-full bg-gold px-6 py-4 text-sm font-semibold text-black transition hover:scale-[1.01] sm:w-auto"
               >
                 Send Inquiry
               </button>

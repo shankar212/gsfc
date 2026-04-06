@@ -9,7 +9,7 @@ type TreeBranchProps = {
 export function TreeBranch({ className = "" }: TreeBranchProps) {
   return (
     <motion.div
-      className={`pointer-events-none absolute left-0 top-0 z-[3] hidden h-[32rem] w-[34rem] xl:block ${className}`}
+      className={`pointer-events-none absolute left-[-3.25rem] top-0 z-[3] h-[14rem] w-[15rem] sm:left-[-2.5rem] sm:h-[18rem] sm:w-[20rem] md:left-[-1rem] md:h-[24rem] md:w-[26rem] xl:left-0 xl:h-[32rem] xl:w-[34rem] ${className}`}
       initial={{ opacity: 0, x: -30 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 1.4, ease: "easeOut" }}
